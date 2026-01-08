@@ -16,7 +16,7 @@
     "build:android:device": "eas build --profile development:device --platform android --local",
     "build:android:preview": "eas build --profile preview --platform android --local",
     "build:android:prod": "eas build --profile production --platform android --local",
-    "rchcheck": "npx react-compiler-healthcheck@latest"
+    "rch": "npx react-compiler-healthcheck@latest"
   },
   "dependencies": {
     "@libs/app": "workspace:*",
