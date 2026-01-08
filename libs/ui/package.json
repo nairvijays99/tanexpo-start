@@ -1,7 +1,7 @@
 {
   "name": "@libs/ui",
   "description": "Shared UI components for Expo and TanStack Start",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "packageManager": "pnpm@10.20.0",
   "main": "src/index.ts",
   "types": "src/index.ts",
