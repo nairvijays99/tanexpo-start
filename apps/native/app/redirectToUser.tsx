@@ -1,4 +1,4 @@
-import { RedirectToUser } from "@basicapp/test-router";
+import { RedirectToUser } from "@libs/app";
 
 export default function AboutScreen() {
   return <RedirectToUser />;

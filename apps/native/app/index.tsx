@@ -1,4 +1,4 @@
-import { Home } from "@basicapp/test-router";
+import { Home } from "@libs/app";
 
 export default function HomeScreen() {
   return <Home />;

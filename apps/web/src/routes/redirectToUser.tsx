@@ -1,4 +1,4 @@
-import { RedirectToUser } from "@basicapp/test-router";
+import { RedirectToUser } from "@libs/app";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/redirectToUser")({ component: RedirectToUser });

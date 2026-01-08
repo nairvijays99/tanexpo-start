@@ -31,12 +31,12 @@ export default defineConfig(({ command, isSsrBuild }) => {
     resolve: {
       alias: [
         {
-          find: "@basicapp/ui",
+          find: "@libs/ui",
           replacement: path.resolve(__dirname, "../../libs/ui/src"),
         },
         {
-          find: "@basicapp/test-router",
-          replacement: path.resolve(__dirname, "../../libs/test-router/src"),
+          find: "@libs/app",
+          replacement: path.resolve(__dirname, "../../libs/app/src"),
         },
         { find: "react-native", replacement: "react-native-web" },
         { find: /^react-native\//, replacement: "react-native-web/" },
@@ -86,7 +86,7 @@ export default defineConfig(({ command, isSsrBuild }) => {
         "css-to-react-native",
         "hyphenate-style-name",
         "style-to-css-string",
-        /^@basicapp\/.*/,
+        /^@libs\/.*/,
         isBuild ? "styleq" : false,
       ].filter(Boolean),
     },

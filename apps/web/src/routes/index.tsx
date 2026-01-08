@@ -1,4 +1,4 @@
-import { Home } from "@basicapp/test-router";
+import { Home } from "@libs/app";
 import { createFileRoute } from "@tanstack/react-router";
 
 export function HomeScreen() {

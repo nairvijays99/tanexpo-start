@@ -11,8 +11,8 @@
     "paths": {
       "@libs/ui/*": ["libs/ui/src/*"],
       "@libs/ui": ["libs/ui/src/index"],
-      "@libs/test-router/*": ["libs/test-router/src/*"],
-      "@libs/test-router": ["libs/test-router/src/index"]
+      "@libs/app/*": ["libs/app/src/*"],
+      "@libs/app": ["libs/app/src/index"]
     },
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,

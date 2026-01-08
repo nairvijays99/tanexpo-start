@@ -1,4 +1,4 @@
-import { UserPost } from "@basicapp/test-router";
+import { UserPost } from "@libs/app";
 
 export default function UserPostScreen() {
   return <UserPost />;

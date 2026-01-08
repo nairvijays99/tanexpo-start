@@ -1,4 +1,4 @@
-import { About } from "@basicapp/test-router";
+import { About } from "@libs/app";
 import { createFileRoute } from "@tanstack/react-router";
 
 export function AboutScreen() {

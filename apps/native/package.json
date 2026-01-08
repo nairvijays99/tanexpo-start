@@ -9,8 +9,8 @@
     "ios": "expo run:ios"
   },
   "dependencies": {
-    "@basicapp/test-router": "workspace:*",
-    "@basicapp/ui": "workspace:*",
+    "@libs/app": "workspace:*",
+    "@libs/ui": "workspace:*",
     "@react-navigation/native": "^7.1.25",
     "expo": "~54.0.29",
     "expo-dev-client": "^6.0.20",
