@@ -1,6 +1,6 @@
 {
   "name": "tanexpo-foodrecipe",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Shared cross-platform UI components for React Native and TanStack Start, with automatic native/web resolution.",
   "homepage": "https://github.com/nairvijays99/tanexpo-foodrecipe",
   "bugs": {
