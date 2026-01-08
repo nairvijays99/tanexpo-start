@@ -11,7 +11,7 @@ const rootPkg = JSON.parse(fs.readFileSync(path.resolve(__dirname, "..", "packag
 const rootVersion = rootPkg.version;
 
 // You may later read workspace dirs dynamically from pnpm-workspace.yaml
-const workspaceDirs = ["libs/ui", "libs/features"];
+const workspaceDirs = ["libs/ui", "libs/app"];
 
 let failed = false;
 
