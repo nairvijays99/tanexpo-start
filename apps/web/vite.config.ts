@@ -25,7 +25,11 @@ export default defineConfig(({ command, isSsrBuild }) => {
         projects: [rootTsconfig, webTsconfig],
       }),
       tanstackStart(),
-      viteReact(),
+      viteReact({
+        babel: {
+          plugins: ["babel-plugin-react-compiler"],
+        },
+      }),
       nitro(),
     ],
     resolve: {

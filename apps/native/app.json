@@ -28,7 +28,6 @@
       "predictiveBackGestureEnabled": false
     },
     "plugins": [
-      "expo-localization",
       "expo-font",
       [
         "expo-splash-screen",
@@ -50,6 +49,9 @@
       ],
       "expo-build-properties",
       "expo-router"
-    ]
+    ],
+    "experiments": {
+      "reactCompiler": true
+    }
   }
 }
