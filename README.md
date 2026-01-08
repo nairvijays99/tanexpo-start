@@ -24,7 +24,8 @@ TanExpo Start is a starter application that showcases **cross-platform monorepo*
 │
 ├─ packages/
 │  ├─ apps/      # Shared features, providers, etc.
-│  ├─ ui/        # Design system, pure components, etc.
+│  ├─ ui/        # Themes, UI components, etc.
+│  ├─ ...
 ```
 
 ## 🧩 Component Strategy

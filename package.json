@@ -15,12 +15,11 @@
     "check-versions": "node ./scripts/check-versions.js",
     "lint": "biome lint .",
     "lint:fix": "biome lint --write .",
-    "format": "biome format --write .",
+    "format": "biome format .",
+    "format:fix": "biome format --write .",
     "check": "biome check .",
     "check:fix": "biome check --write .",
-    "format:check": "biome format .",
     "clean": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +",
-    "clean:i": "pnpm clean && pnpm install",
     "dev": "pnpm --filter ./apps/web run dev",
     "start": "pnpm --filter ./apps/native run start",
     "ios": "pnpm --filter ./apps/native run ios",
@@ -43,7 +42,7 @@
   "license": "ISC",
   "packageManager": "pnpm@10.20.0",
   "devDependencies": {
-    "@biomejs/biome": "2.3.8",
+    "@biomejs/biome": "2.3.10",
     "husky": "9.1.7",
     "typescript": "^5.9.3"
   },
