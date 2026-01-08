@@ -1,13 +1,6 @@
-# TanExpo
+# TanExpo Food Recipe
 
-TanExpo is a **cross-platform monorepo** that enables sharing **UI components, navigation primitives, and application features** between:
-
-- **Expo / React Native** (native apps)
-- **TanStack Start / Vite** (web apps)
-
-It is inspired by projects like **Solito**, but tailored for **TanStack Start + Expo**, using **pnpm workspaces**, **TypeScript**, and **Biome**.
-
-TanExpo treats **React Native as the primary UI abstraction**, with the web acting purely as a renderer via **react-native-web**.
+TanExpo Food Recipe is a demo application that showcases **cross-platform monorepo** that enables sharing **UI components, navigation primitives, and application features** between `Expo` and `TanStack Start`.
 
 ---
 
@@ -22,85 +15,17 @@ TanExpo treats **React Native as the primary UI abstraction**, with the web acti
 
 ---
 
-## 🗂 Repository Structure
+## 🗂 Monorepo Structure
 
 ```
-tanexpo/
 ├─ apps/
 │  ├─ native/        # Expo (React Native) app
 │  └─ web/           # TanStack Start / Vite web app
 │
 ├─ packages/
-│  ├─ ui/            # Shared UI components
-│  ├─ features/      # Shared feature modules (in progress)
-│  └─ router/        # Shared cross-platform navigation primitives
-│
-├─ scripts/
-│  └─ check-versions.js
-│
-├─ .vscode/
-│  ├─ settings.json
-│  └─ extensions.json
-│
-├─ biome.json
-├─ pnpm-workspace.yaml
-├─ tsconfig.base.json
-├─ package.json
-└─ README.md
+│  ├─ apps/      # Shared features, providers, etc.
+│  ├─ ui/        # Design system, pure components, etc.
 ```
-
----
-
-## 📦 Package Philosophy
-
-### `packages/ui`
-Shared **UI components** built using **React Native primitives**.
-
-- No web-specific UI libraries
-- No DOM-specific code
-- Same component renders on native and web
-
-### `packages/features` (in progress)
-Shared **feature-level components and logic** (screens, flows, providers).
-
-### `packages/router`
-Shared **cross-platform routing primitives**.
-
-- Exposes a minimal, platform-agnostic API
-- Works on both native and web
-- Hides router-specific implementations
-- Uses file resolution (`.native.tsx`) instead of runtime platform checks
-
-All shared packages:
-- Prefer platform-agnostic implementations
-- Use platform-specific files only when interacting with SDKs
-- Are imported via clean aliases:
-  ```ts
-  import { Button } from 'app/ui/Button'
-  import { Link, useRouter } from 'app/router'
-  ```
-
----
-
-## 🧠 Core Architecture: React Native Everywhere
-
-TanExpo enables **true cross-platform UI sharing** by rendering **React Native components everywhere**.
-
-- **Native** renders React Native directly
-- **Web** renders the same components using **react-native-web**
-- Web works by aliasing:
-  ```ts
-  react-native → react-native-web
-  ```
-  in the web Vite configuration
-
-The result:
-- Identical component trees
-- Identical layout behavior
-- Minimal platform conditionals
-- No duplicated UI implementations
-
----
 
 ## 🧩 Component Strategy
 
@@ -130,25 +55,13 @@ export const Button = ({ label }) => (
   - Used for **native-only SDKs** (Expo APIs, native auth, sensors, etc.)
 - `*.tsx`
   - Used for **platform-agnostic UI** or **web-specific implementations**
-- **Never branch on platform inside a component**
 - Platform differences must be expressed via **file resolution only**
 
 ---
 
 ## 🧭 Cross-Platform Navigation
 
-TanExpo provides shared routing primitives via `packages/router`, following an **Expo Router–first mental model**, while mapping internally to:
-
-- **Expo Router** on native
-- **TanStack Router** on web
-
-### Design principles
-
-- Expo-first API for developer experience
-- Minimal, honest surface area
-- No router-specific imports in shared code
-- No runtime platform checks
-- Platform differences handled via file resolution
+Uses TanExpo routing abstraction from expo-router
 
 ---
 
@@ -157,7 +70,7 @@ TanExpo provides shared routing primitives via `packages/router`, following an *
 The `Link` component works identically on **native and web**.
 
 ```ts
-import { Link } from 'app/router'
+import { Link } from 'tanexpo'
 
 <Link href="/about">
   Go to About
@@ -198,6 +111,7 @@ import { Link } from 'app/router'
 Prefetching follows the **Expo Router API**, with additional hints supported on web.
 
 ```ts
+
 <Link href="/feed" prefetch>
   Feed
 </Link>
@@ -216,7 +130,7 @@ Prefetching follows the **Expo Router API**, with additional hints supported on 
 `useRouter()` provides imperative navigation with the same API on native and web.
 
 ```ts
-import { useRouter } from 'app/router'
+import { useRouter } from 'tanexpo'
 
 const router = useRouter()
 
@@ -260,7 +174,7 @@ router.prefetch({
 It works identically on **native and web**, allowing shared code to read parameters without importing router-specific hooks.
 
 ```ts
-import { useLocalSearchParams } from 'app/router'
+import { useLocalSearchParams } from 'tanexpo'
 
 const params = useLocalSearchParams()
 ```
@@ -279,17 +193,6 @@ const { id } = useLocalSearchParams()
 const { tab } = useLocalSearchParams()
 ```
 
-### Behavior notes
-
-- Returns a **flat object** containing both path params and query params
-- Missing params return `undefined`
-- Values may be `string` or `string[]`
-- API matches `expo-router` semantics
-- Internally maps to:
-  - `expo-router` on native
-  - `@tanstack/react-router` (`useParams` + `useSearch`) on web
----
-
 ## 🔁 `<Redirect />`
 
 The `<Redirect />` component provides an **Expo-compatible, declarative redirect API** for shared screens and layouts.
@@ -297,7 +200,7 @@ The `<Redirect />` component provides an **Expo-compatible, declarative redirect
 It works identically on **native and web**, allowing redirects without importing router-specific components or using imperative effects.
 
 ```ts
-import { Redirect } from 'app/router'
+import { Redirect } from 'tanexpo'
 
 <Redirect href="/login" />
 ```
@@ -317,17 +220,6 @@ import { Redirect } from 'app/router'
     params: { id: 'bacon' }
   }}
 />
-```
-
-### Behavior notes
-
-- Performs a declarative redirect during render
-- Supports string and object-based `href`
-- Honors `replace` to avoid back navigation
-- API matches `expo-router` semantics
-- Internally maps to:
-  - `expo-router` on native
-  - `@tanstack/react-router` (`<Navigate />`) on web
 ```
 
 ---
@@ -368,23 +260,6 @@ Expo dictates compatible versions for:
 
 These are **pinned in the root `package.json`** and shared across all apps and packages.
 
-### Enforcement via `pnpm.overrides`
-
-```json
-{
-  "pnpm": {
-    "overrides": {
-      "react": "19.1.0",
-      "react-dom": "19.1.0",
-      "react-native": "0.81.5",
-      "react-native-web": "~0.21.0",
-      "@types/react": "19.1.0",
-      "@types/react-dom": "19.1.0"
-    }
-  }
-}
-```
-
 ---
 
 ## 🧪 Version Consistency Check
@@ -395,28 +270,20 @@ pnpm check-versions
 
 ---
 
-## 🧹 Formatting & Linting (Biome)
-
-```bash
-pnpm lint
-pnpm format
-```
-
----
-
-## 🚀 Running the Apps
+## 🚀 Running the App
 
 ### Native (Expo)
 
 ```bash
-pnpm native:ios
-pnpm native:android
+pnpm start
+pnpm ios
+pnpm android
 ```
 
 ### Web (TanStack Start / Vite)
 
 ```bash
-pnpm web:dev
+pnpm dev
 pnpm web:build
 pnpm web:serve
 ```
