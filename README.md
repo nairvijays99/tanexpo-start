@@ -1,6 +1,6 @@
-# TanExpo Food Recipe
+# TanExpo Start
 
-TanExpo Food Recipe is a demo application that showcases **cross-platform monorepo** that enables sharing **UI components, navigation primitives, and application features** between `Expo` and `TanStack Start`.
+TanExpo Start is a starter application that showcases **cross-platform monorepo** that enables sharing **UI components, navigation primitives, and application features** between `Expo` and `TanStack Start`.
 
 ---
 

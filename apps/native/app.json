@@ -1,26 +1,33 @@
 {
   "expo": {
-    "name": "TanExpo - Food Recipe",
-    "slug": "tanexpo-foodrecipe",
-    "version": "1.0.0",
+    "name": "TanExpo - Start",
+    "slug": "tanexpo-start",
+    "scheme": "com.tanexpo.start",
+    "version": "0.0.1",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icons/icon.png",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "jsEngine": "hermes",
     "assetBundlePatterns": ["**/*"],
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/icons/splash-icon-dark.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.demo.foodrecipe"
+      "bundleIdentifier": "com.tanexpo.start",
+      "icon": {
+        "dark": "./assets/icons/ios-dark.png",
+        "light": "./assets/icons/ios-light.png",
+        "tinted": "./assets/icons/ios-tinted.png"
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icons/adaptive-icon.png",
+        "monochromeImage": "./assets/icons/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
       "allowBackup": false,
@@ -32,10 +39,14 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/app-icon-android-adaptive-foreground.png",
+          "image": "./assets/icons/splash-icon-light.png",
           "imageWidth": 300,
           "resizeMode": "contain",
-          "backgroundColor": "#191015"
+          "backgroundColor": "#000000",
+          "dark": {
+            "image": "./assets/icons/splash-icon-dark.png",
+            "backgroundColor": "#ffffff"
+          }
         }
       ],
       [
