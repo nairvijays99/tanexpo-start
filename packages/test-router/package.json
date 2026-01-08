@@ -1,0 +1,12 @@
+{
+  "name": "@basicapp/test-router",
+  "description": "Test router features",
+  "version": "1.0.0",
+  "packageManager": "pnpm@10.20.0",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@basicapp/ui/*": ["packages/ui/src/*"],
+      "@basicapp/ui": ["packages/ui/src/index"],
+      "@basicapp/test-router/*": ["packages/test-router/src/*"],
+      "@basicapp/test-router": ["packages/test-router/src/index"]
+    },
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "types": ["node"],
+    "allowImportingTsExtensions": false
+  },
+  "include": []
+}

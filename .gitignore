@@ -1,0 +1,103 @@
+# ---------------------------
+# Root Monorepo Ignored Files
+# ---------------------------
+
+# Node
+node_modules/
+.pnpm-store/
+.pnpm/
+
+# Build outputs
+dist/
+build/
+out/
+.esbuild/
+.next/
+.start/        # TanStack Start build output
+.tmp/
+temp/
+
+# TypeScript
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# Env files
+.env
+.env.*
+!.env.example
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.log
+
+# Editor / OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!/.vscode/settings.json
+!/.vscode/extensions.json
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Turborepo / task runners
+.turbo/
+.turborepo/
+
+# ---------------------------
+# Apps
+# ---------------------------
+
+# Expo specific
+apps/*/android/
+apps/*/ios/
+apps/*/dist/
+apps/*/.expo/
+apps/*/.expo-shared/
+apps/*/.expo-packager/
+apps/*/web-build/
+apps/*/.expo-dev-client/
+
+# React Native
+apps/*/build/
+apps/*/*.keystore
+apps/*/expo-debug.log
+
+# TanStack Start (apps/web or similar)
+apps/*/.tanstack/
+apps/*/.vercel/
+apps/*/.cache/
+
+# ---------------------------
+# Packages
+# ---------------------------
+
+packages/*/dist/
+packages/*/build/
+packages/*/.cache/
+
+# TypeScript project references
+packages/*/*.tsbuildinfo
+
+# Local linking logs
+packages/*/npm-debug.log*
+
+# ---------------------------
+# Misc
+# ---------------------------
+
+# Lockfiles inside subprojects (pnpm uses root lockfile)
+apps/*/package-lock.json
+packages/*/package-lock.json
+apps/*/yarn.lock
+packages/*/yarn.lock
+
+# JetBrains
+*.iml
+
