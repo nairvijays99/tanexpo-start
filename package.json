@@ -25,8 +25,16 @@
     "start": "pnpm --filter ./apps/native run start",
     "ios": "pnpm --filter ./apps/native run ios",
     "android": "pnpm --filter ./apps/native run android",
-    "web:build": "pnpm --filter ./apps/web run build",
-    "web:serve": "pnpm --filter ./apps/web run serve"
+    "build:web": "pnpm --filter ./apps/web run build",
+    "build:web:serve": "pnpm --filter ./apps/web run serve",
+    "build:ios:sim": "pnpm --filter ./apps/native run build:ios:sim",
+    "build:ios:device": "pnpm --filter ./apps/native run build:ios:device",
+    "build:ios:preview": "pnpm --filter ./apps/native run build:ios:preview",
+    "build:ios:prod": "pnpm --filter ./apps/native run build:ios:prod",
+    "build:android:sim": "pnpm --filter ./apps/native run build:android:sim",
+    "build:android:device": "pnpm --filter ./apps/native run build:android:device",
+    "build:android:preview": "pnpm --filter ./apps/native run build:android:preview",
+    "build:android:prod": "pnpm --filter ./apps/native run build:android:prod"
   },
   "keywords": [],
   "author": "Vijay S Nair",
