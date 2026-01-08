@@ -9,10 +9,10 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@basicapp/ui/*": ["packages/ui/src/*"],
-      "@basicapp/ui": ["packages/ui/src/index"],
-      "@basicapp/test-router/*": ["packages/test-router/src/*"],
-      "@basicapp/test-router": ["packages/test-router/src/index"]
+      "@libs/ui/*": ["libs/ui/src/*"],
+      "@libs/ui": ["libs/ui/src/index"],
+      "@libs/test-router/*": ["libs/test-router/src/*"],
+      "@libs/test-router": ["libs/test-router/src/index"]
     },
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,

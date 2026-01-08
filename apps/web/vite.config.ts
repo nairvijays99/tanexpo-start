@@ -32,11 +32,11 @@ export default defineConfig(({ command, isSsrBuild }) => {
       alias: [
         {
           find: "@basicapp/ui",
-          replacement: path.resolve(__dirname, "../../packages/ui/src"),
+          replacement: path.resolve(__dirname, "../../libs/ui/src"),
         },
         {
           find: "@basicapp/test-router",
-          replacement: path.resolve(__dirname, "../../packages/test-router/src"),
+          replacement: path.resolve(__dirname, "../../libs/test-router/src"),
         },
         { find: "react-native", replacement: "react-native-web" },
         { find: /^react-native\//, replacement: "react-native-web/" },
