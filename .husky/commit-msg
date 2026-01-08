@@ -1,0 +1,31 @@
+#!/usr/bin/env sh
+echo "🔥 HUSKY RUN COMMIT-MSG"
+commit_msg_file="$1"
+commit_msg="$(cat "$commit_msg_file")"
+
+# Allowed types
+TYPES="feat|fix|chore|docs|refactor|test|ci|build|perf"
+
+# Regex:
+# type(scope?): description (#123)
+PATTERN="^(${TYPES})(\\([a-zA-Z0-9_-]+\\))?: .+ \\(#\\d+\\)$"
+
+if ! echo "$commit_msg" | grep -Eq "$PATTERN"; then
+  echo ""
+  echo "❌ Invalid commit message format."
+  echo ""
+  echo "Expected:"
+  echo "  <type>(optional scope): <short description> (#issue)"
+  echo ""
+  echo "Examples:"
+  echo "  feat(router): add native search params (#17)"
+  echo "  fix: handle null route params (#42)"
+  echo "  chore: setup husky hooks (#12)"
+  echo ""
+  echo "Allowed types:"
+  echo "  feat, fix, chore, docs, refactor, test, ci, build, perf"
+  echo ""
+  exit 1
+fi
+
+exit 0

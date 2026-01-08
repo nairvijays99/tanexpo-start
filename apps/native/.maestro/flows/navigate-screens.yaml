@@ -1,0 +1,9 @@
+appId: ${MAESTRO_APP_ID}
+
+onFlowStart:
+  - runFlow: ../shared/_OnFlowStart.yaml
+
+---
+- tapOn: "Go to About"
+- waitForAnimationToEnd
+- tapOn: "Go to Home"

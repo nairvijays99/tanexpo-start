@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@libs/ui/*": ["libs/ui/src/*"],
+      "@libs/ui": ["libs/ui/src/index"],
+      "@libs/app/*": ["libs/app/src/*"],
+      "@libs/app": ["libs/app/src/index"]
+    },
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "types": ["node"],
+    "allowImportingTsExtensions": false
+  },
+  "include": []
+}

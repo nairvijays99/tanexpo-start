@@ -1,0 +1,28 @@
+{
+  "name": "@libs/app",
+  "description": "Test router features",
+  "version": "0.0.1",
+  "packageManager": "pnpm@10.20.0",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "tanexpo": "^0.2.0"
+  },
+  "peerDependencies": {
+    "react": ">=19.1.0",
+    "react-native": ">=0.81.5",
+    "react-native-web": ">=0.21.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.0",
+    "@types/react-dom": "19.1.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-native": "0.81.5",
+    "react-native-web": "~0.21.0"
+  }
+}
