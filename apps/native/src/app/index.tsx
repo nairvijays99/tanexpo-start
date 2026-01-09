@@ -1,5 +1,5 @@
-import { Home } from "@libs/app";
+import { WelcomeScreen } from "@libs/app";
 
-export default function HomeScreen() {
-  return <Home />;
+export default function Index() {
+  return <WelcomeScreen />;
 }

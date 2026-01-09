@@ -1,6 +1,14 @@
 {
   "extends": "../../tsconfig.base.json",
-  "compilerOptions": { "outDir": "dist", "rootDir": "src", "composite": true, "declaration": true },
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "composite": true,
+    "declaration": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
   "include": ["src/**/*"],
   "references": [{ "path": "../utils" }]
 }
