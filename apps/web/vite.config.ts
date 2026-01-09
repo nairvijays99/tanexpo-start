@@ -1,4 +1,3 @@
-import path from "node:path";
 import { devtools } from "@tanstack/devtools-vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
@@ -6,23 +5,14 @@ import { nitro } from "nitro/vite";
 import { defineConfig } from "vite";
 import viteTsConfigPaths from "vite-tsconfig-paths";
 
-const rootTsconfig = path.resolve(__dirname, "../../tsconfig.base.json");
-const webTsconfig = path.resolve(__dirname, "./tsconfig.json");
-
 export default defineConfig(({ command, isSsrBuild }) => {
   const isBuild = command === "build" || isSsrBuild === true;
-  const styleqAliases = isBuild
-    ? [
-        { find: /^styleq\/(.*)/, replacement: "styleq/dist/$1" },
-        { find: /^styleq$/, replacement: "styleq/dist/styleq" },
-      ]
-    : [];
 
   return {
     plugins: [
       devtools(),
       viteTsConfigPaths({
-        projects: [rootTsconfig, webTsconfig],
+        projects: ["../../tsconfig.base.json", "./tsconfig.json"],
       }),
       tanstackStart(),
       viteReact({
@@ -34,14 +24,6 @@ export default defineConfig(({ command, isSsrBuild }) => {
     ],
     resolve: {
       alias: [
-        {
-          find: "@libs/ui",
-          replacement: path.resolve(__dirname, "../../libs/ui/src"),
-        },
-        {
-          find: "@libs/app",
-          replacement: path.resolve(__dirname, "../../libs/app/src"),
-        },
         { find: "react-native", replacement: "react-native-web" },
         { find: /^react-native\//, replacement: "react-native-web/" },
         {
@@ -61,14 +43,30 @@ export default defineConfig(({ command, isSsrBuild }) => {
           find: "react-native/Libraries/EventEmitter/NativeEventEmitter$",
           replacement: "react-native-web/dist/vendor/react-native/NativeEventEmitter",
         },
-
-        ...styleqAliases,
         { find: /^inline-style-prefixer\/lib\/(.*)/, replacement: "inline-style-prefixer/es/$1" },
         { find: /^inline-style-prefixer\/lib$/, replacement: "inline-style-prefixer/es" },
         { find: /^css-in-js-utils\/lib\/(.*)/, replacement: "css-in-js-utils/es/$1" },
         { find: /^css-in-js-utils\/lib$/, replacement: "css-in-js-utils/es" },
+        ...(isBuild
+          ? [
+              { find: /^styleq\/(.*)/, replacement: "styleq/dist/$1" },
+              { find: /^styleq$/, replacement: "styleq/dist/styleq" },
+            ]
+          : []),
       ],
-      mainFields: ["module", "main"],
+      extensions: [
+        ".web.js",
+        ".web.jsx",
+        ".web.ts",
+        ".web.tsx",
+        ".mjs",
+        ".js",
+        ".mts",
+        ".ts",
+        ".jsx",
+        ".tsx",
+        ".json",
+      ],
     },
     define: {
       __DEV__: JSON.stringify(process.env.NODE_ENV !== "production"),
@@ -90,14 +88,13 @@ export default defineConfig(({ command, isSsrBuild }) => {
         "css-to-react-native",
         "hyphenate-style-name",
         "style-to-css-string",
-        /^@libs\/.*/,
-        isBuild ? "styleq" : false,
-      ].filter(Boolean),
-    },
-    server: {
-      fs: {
-        allow: [path.resolve(__dirname, "../../")],
-      },
+        "moti",
+        "react-native-reanimated",
+        "react-native-gesture-handler",
+        "@libs/ui",
+        "@libs/app",
+        ...(isBuild ? ["styleq"] : []),
+      ],
     },
   };
 });
