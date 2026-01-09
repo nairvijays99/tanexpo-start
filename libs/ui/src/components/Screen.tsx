@@ -1,3 +1,4 @@
+import { type ExtendedEdge, useSafeAreaInsetsStyle } from "@libs/utils";
 import { useScrollToTop } from "@react-navigation/native";
 import { type ReactNode, useRef, useState } from "react";
 import {
@@ -13,10 +14,8 @@ import {
 } from "react-native";
 import { type SystemBarStyle, SystemBars, type SystemBarsProps } from "react-native-edge-to-edge";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
-
 import { useAppTheme } from "@/theme/context";
 import { $styles } from "@/theme/styles";
-import { type ExtendedEdge, useSafeAreaInsetsStyle } from "@/utils/useSafeAreaInsetsStyle";
 
 export const DEFAULT_BOTTOM_OFFSET = 50;
 

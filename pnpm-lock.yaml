@@ -195,6 +195,12 @@ importers:
 
   libs/app:
     dependencies:
+      '@libs/ui':
+        specifier: workspace:*
+        version: link:../ui
+      '@libs/utils':
+        specifier: workspace:*
+        version: link:../utils
       tanexpo:
         specifier: ^0.2.0
         version: 0.2.0(@tanstack/react-router@1.145.11(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(expo-router@6.0.21)(react-dom@19.1.0(react@19.1.0))(react-native-web@0.21.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.0)(react@19.1.0))(react@19.1.0)

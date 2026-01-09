@@ -10,7 +10,9 @@
     ".": "./src/index.ts"
   },
   "dependencies": {
-    "tanexpo": "^0.2.0"
+    "tanexpo": "^0.2.0",
+    "@libs/ui": "workspace:*",
+    "@libs/utils": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=19.1.0",

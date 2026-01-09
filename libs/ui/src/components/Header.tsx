@@ -1,3 +1,4 @@
+import { type ExtendedEdge, useSafeAreaInsetsStyle } from "@libs/utils";
 import type { ReactElement } from "react";
 import {
   type StyleProp,
@@ -7,13 +8,9 @@ import {
   View,
   type ViewStyle,
 } from "react-native";
-
-import { isRTL } from "@/i18n";
-import { translate } from "@/i18n/translate";
 import { useAppTheme } from "@/theme/context";
 import { $styles } from "@/theme/styles";
 import type { ThemedStyle } from "@/theme/types";
-import { type ExtendedEdge, useSafeAreaInsetsStyle } from "@/utils/useSafeAreaInsetsStyle";
 
 import { type IconTypes, PressableIcon } from "./Icon";
 import { Text, type TextProps } from "./Text";
@@ -172,8 +169,6 @@ export function Header(props: HeaderProps) {
     safeAreaEdges = ["top"],
     title,
     titleMode = "center",
-    titleTx,
-    titleTxOptions,
     titleContainerStyle: $titleContainerStyleOverride,
     style: $styleOverride,
     titleStyle: $titleStyleOverride,
@@ -182,7 +177,8 @@ export function Header(props: HeaderProps) {
 
   const $containerInsets = useSafeAreaInsetsStyle(safeAreaEdges);
 
-  const titleContent = titleTx ? translate(titleTx, titleTxOptions) : title;
+  //const titleContent = titleTx ? translate(titleTx, titleTxOptions) : title;
+  const titleContent = title;
 
   return (
     <View style={[$container, $containerInsets, { backgroundColor }, $containerStyleOverride]}>
@@ -264,7 +260,7 @@ function HeaderAction(props: HeaderActionProps) {
         color={iconColor}
         onPress={onPress}
         containerStyle={themed([$actionIconContainer, { backgroundColor }])}
-        style={isRTL ? { transform: [{ rotate: "180deg" }] } : {}}
+        //style={isRTL ? { transform: [{ rotate: "180deg" }] } : {}}
       />
     );
   }

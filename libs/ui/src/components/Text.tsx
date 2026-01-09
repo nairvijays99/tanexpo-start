@@ -1,4 +1,3 @@
-import type { TOptions } from "i18next";
 import { type ForwardedRef, forwardRef, type ReactNode } from "react";
 // eslint-disable-next-line no-restricted-imports
 import {
@@ -8,8 +7,6 @@ import {
   type TextStyle,
 } from "react-native";
 
-import { isRTL, type TxKeyPath } from "@/i18n";
-import { translate } from "@/i18n/translate";
 import { useAppTheme } from "@/theme/context";
 import type { ThemedStyle, ThemedStyleArray } from "@/theme/types";
 import { typography } from "@/theme/typography";
@@ -22,7 +19,7 @@ export interface TextProps extends RNTextProps {
   /**
    * Text which is looked up via i18n.
    */
-  tx?: TxKeyPath;
+  tx?: string;
   /**
    * The text to display if not using `tx` or nested components.
    */
@@ -31,7 +28,7 @@ export interface TextProps extends RNTextProps {
    * Optional options to pass to i18n. Useful for interpolation
    * as well as explicitly setting locale or translation fallbacks.
    */
-  txOptions?: TOptions;
+  txOptions?: string;
   /**
    * An optional style override useful for padding & margin.
    */
@@ -65,8 +62,10 @@ export const Text = forwardRef(function Text(props: TextProps, ref: ForwardedRef
   const { weight, size, tx, txOptions, text, children, style: $styleOverride, ...rest } = props;
   const { themed } = useAppTheme();
 
-  const i18nText = tx && translate(tx, txOptions);
-  const content = i18nText || text || children;
+  //const i18nText = tx && translate(tx, txOptions);
+  //const content = i18nText || text || children;
+
+  const content = text || children;
 
   const preset: Presets = props.preset ?? "default";
   const $styles: StyleProp<TextStyle> = [
@@ -122,4 +121,5 @@ const $presets: Record<Presets, ThemedStyleArray<TextStyle>> = {
   formLabel: [$baseStyle, { ...$fontWeightStyles.medium }],
   formHelper: [$baseStyle, { ...$sizeStyles.sm, ...$fontWeightStyles.normal }],
 };
-const $rtlStyle: TextStyle = isRTL ? { writingDirection: "rtl" } : {};
+// const $rtlStyle: TextStyle = isRTL ? { writingDirection: "rtl" } : {};
+const $rtlStyle: TextStyle = {};

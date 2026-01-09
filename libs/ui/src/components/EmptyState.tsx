@@ -8,7 +8,6 @@ import {
   type ViewStyle,
 } from "react-native";
 
-import { translate } from "@/i18n/translate";
 import { useAppTheme } from "@/theme/context";
 import type { ThemedStyle } from "@/theme/types";
 
@@ -134,9 +133,9 @@ export function EmptyState(props: EmptyStateProps) {
   const EmptyStatePresets = {
     generic: {
       imageSource: sadFace,
-      heading: translate("emptyStateComponent:generic.heading"),
-      content: translate("emptyStateComponent:generic.content"),
-      button: translate("emptyStateComponent:generic.button"),
+      heading: "So empty... so sad",
+      content: "No data found yet. Try clicking the button to refresh or reload the app.",
+      button: "Let's try this again",
     } as EmptyStatePresetItem,
   } as const;
 

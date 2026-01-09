@@ -3,10 +3,11 @@
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "src",
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*", "../ui/src/components"],
-  "references": [{ "path": "../utils" }, { "path": "../ui" }]
+  "include": ["src/**/*"],
+  "references": [{ "path": "../ui" }]
 }

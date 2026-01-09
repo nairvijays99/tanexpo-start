@@ -1,15 +1,8 @@
-import { Screen } from "@libs/ui";
+import type { ThemedStyle } from "@libs/ui";
+import { $styles, Screen, Text, useAppTheme } from "@libs/ui";
+import { useSafeAreaInsetsStyle } from "@libs/utils";
 import type { FC } from "react";
-import { Image, type ImageStyle, type TextStyle, View, type ViewStyle } from "react-native";
-import { Text } from "@/components/Text";
-import { isRTL } from "@/i18n";
-import { useAppTheme } from "@/theme/context";
-import { $styles } from "@/theme/styles";
-import type { ThemedStyle } from "@/theme/types";
-import { useSafeAreaInsetsStyle } from "@/utils/useSafeAreaInsetsStyle";
-
-const welcomeLogo = require("@assets/images/logo.png");
-const welcomeFace = require("@assets/images/welcome-face.png");
+import { type ImageStyle, type TextStyle, View, type ViewStyle } from "react-native";
 
 export const WelcomeScreen: FC = function WelcomeScreen() {
   const { themed, theme } = useAppTheme();
@@ -19,7 +12,7 @@ export const WelcomeScreen: FC = function WelcomeScreen() {
   return (
     <Screen preset="fixed" contentContainerStyle={$styles.flex1}>
       <View style={themed($topContainer)}>
-        <Image style={themed($welcomeLogo)} source={welcomeLogo} resizeMode="contain" />
+        {/* <Image style={themed($welcomeLogo)} source={welcomeLogo} resizeMode="contain" /> */}
         <Text
           testID="welcome-heading"
           style={themed($welcomeHeading)}
@@ -27,12 +20,12 @@ export const WelcomeScreen: FC = function WelcomeScreen() {
           preset="heading"
         />
         <Text tx="welcomeScreen:exciting" preset="subheading" />
-        <Image
+        {/* <Image
           style={$welcomeFace}
           source={welcomeFace}
           resizeMode="contain"
           tintColor={theme.colors.palette.neutral900}
-        />
+        /> */}
       </View>
 
       <View style={themed([$bottomContainer, $bottomContainerInsets])}>
@@ -73,7 +66,7 @@ const $welcomeFace: ImageStyle = {
   position: "absolute",
   bottom: -47,
   right: -80,
-  transform: [{ scaleX: isRTL ? -1 : 1 }],
+  transform: [{ scaleX: 1 }],
 };
 
 const $welcomeHeading: ThemedStyle<TextStyle> = ({ spacing }) => ({

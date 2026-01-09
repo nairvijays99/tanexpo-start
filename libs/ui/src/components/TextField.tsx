@@ -11,8 +11,6 @@ import {
   type ViewStyle,
 } from "react-native";
 
-import { isRTL } from "@/i18n";
-import { translate } from "@/i18n/translate";
 import { useAppTheme } from "@/theme/context";
 import { $styles } from "@/theme/styles";
 import type { ThemedStyle, ThemedStyleArray } from "@/theme/types";
@@ -140,9 +138,7 @@ export const TextField = forwardRef(function TextField(props: TextFieldProps, re
 
   const disabled = TextInputProps.editable === false || status === "disabled";
 
-  const placeholderContent = placeholderTx
-    ? translate(placeholderTx, placeholderTxOptions)
-    : placeholder;
+  const placeholderContent = placeholder;
 
   const $containerStyles = [$containerStyleOverride];
 
@@ -161,7 +157,7 @@ export const TextField = forwardRef(function TextField(props: TextFieldProps, re
   const $inputStyles: ThemedStyleArray<TextStyle> = [
     $inputStyle,
     disabled && { color: colors.textDim },
-    isRTL && { textAlign: "right" as TextStyle["textAlign"] },
+    //isRTL && { textAlign: "right" as TextStyle["textAlign"] },
     TextInputProps.multiline && { height: "auto" },
     $inputStyleOverride,
   ];
