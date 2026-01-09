@@ -35,7 +35,8 @@
     "build:android:device": "pnpm --filter ./apps/native run build:android:device",
     "build:android:preview": "pnpm --filter ./apps/native run build:android:preview",
     "build:android:prod": "pnpm --filter ./apps/native run build:android:prod",
-    "test:maestro": "pnpm --filter ./apps/native run test:maestro"
+    "test:maestro": "pnpm --filter ./apps/native run test:maestro",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "Vijay S Nair",
