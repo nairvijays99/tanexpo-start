@@ -9,10 +9,12 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@libs/app/*": ["libs/app/src/*"],
+      "@libs/app": ["libs/app/src/index"],
       "@libs/ui/*": ["libs/ui/src/*"],
       "@libs/ui": ["libs/ui/src/index"],
-      "@libs/app/*": ["libs/app/src/*"],
-      "@libs/app": ["libs/app/src/index"]
+      "@libs/utils/*": ["libs/utils/src/*"],
+      "@libs/utils": ["libs/utils/src/index"]
     },
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,

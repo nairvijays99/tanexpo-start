@@ -1,6 +1,6 @@
 {
-  "name": "@libs/ui",
-  "description": "Shared UI components for Expo and TanStack Start",
+  "name": "@libs/utils",
+  "description": "Shared utils for Expo and TanStack Start",
   "version": "0.0.1",
   "packageManager": "pnpm@10.20.0",
   "main": "src/index.ts",
@@ -8,9 +8,6 @@
   "private": true,
   "exports": {
     ".": "./src/index.ts"
-  },
-  "dependencies": {
-    "@libs/utils": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=19.1.0",

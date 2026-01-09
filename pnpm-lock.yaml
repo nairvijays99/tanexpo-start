@@ -219,6 +219,31 @@ importers:
         version: 0.21.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
 
   libs/ui:
+    dependencies:
+      '@libs/utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      '@types/react':
+        specifier: 19.1.0
+        version: 19.1.0
+      '@types/react-dom':
+        specifier: 19.1.0
+        version: 19.1.0(@types/react@19.1.0)
+      react:
+        specifier: 19.1.0
+        version: 19.1.0
+      react-dom:
+        specifier: 19.1.0
+        version: 19.1.0(react@19.1.0)
+      react-native:
+        specifier: 0.81.5
+        version: 0.81.5(@babel/core@7.28.5)(@types/react@19.1.0)(react@19.1.0)
+      react-native-web:
+        specifier: ~0.21.0
+        version: 0.21.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+
+  libs/utils:
     devDependencies:
       '@types/react':
         specifier: 19.1.0
