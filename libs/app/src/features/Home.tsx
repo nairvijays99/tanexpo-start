@@ -6,7 +6,7 @@ export function Home() {
 
   return (
     <View style={{ padding: 16, gap: 12 }}>
-      <Text>Home</Text>
+      <Text style={{ fontSize: 36, color: "black" }}>Home</Text>
 
       {/* Static */}
       <Link href="/about">Go to About</Link>
