@@ -8,8 +8,7 @@ import {
   type ViewStyle,
 } from "react-native";
 
-import { useAppTheme } from "@/theme/context";
-import { $styles } from "@/theme/styles";
+import { useAppTheme } from "../../theme/context";
 
 import { type IconTypes, iconRegistry } from "../Icon";
 import { $inputOuterBase, type BaseToggleInputProps, Toggle, type ToggleProps } from "./Toggle";

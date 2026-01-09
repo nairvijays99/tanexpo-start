@@ -1,12 +1,11 @@
 import type { ErrorInfo } from "react";
 import { ScrollView, type TextStyle, View, type ViewStyle } from "react-native";
-
-import { Button } from "@/components/Button";
-import { Icon } from "@/components/Icon";
-import { Screen } from "@/components/Screen";
-import { Text } from "@/components/Text";
-import { useAppTheme } from "@/theme/context";
-import type { ThemedStyle } from "@/theme/types";
+import { useAppTheme } from "../../theme/context";
+import type { ThemedStyle } from "../../theme/types";
+import { Button } from "../Button";
+import { Icon } from "../Icon";
+import { Screen } from "../Screen";
+import { Text } from "../Text";
 
 export interface ErrorDetailsProps {
   error: Error;

@@ -2,7 +2,7 @@ import type { ThemedStyle } from "@libs/ui";
 import { $styles, Screen, Text, useAppTheme } from "@libs/ui";
 import { useSafeAreaInsetsStyle } from "@libs/utils";
 import type { FC } from "react";
-import { type ImageStyle, type TextStyle, View, type ViewStyle } from "react-native";
+import { type TextStyle, View, type ViewStyle } from "react-native";
 
 export const WelcomeScreen: FC = function WelcomeScreen() {
   const { themed, theme } = useAppTheme();
@@ -16,10 +16,10 @@ export const WelcomeScreen: FC = function WelcomeScreen() {
         <Text
           testID="welcome-heading"
           style={themed($welcomeHeading)}
-          tx="welcomeScreen:readyForLaunch"
+          text="welcomeScreen:readyForLaunch"
           preset="heading"
         />
-        <Text tx="welcomeScreen:exciting" preset="subheading" />
+        <Text text="welcomeScreen:exciting" preset="subheading" />
         {/* <Image
           style={$welcomeFace}
           source={welcomeFace}
@@ -29,7 +29,7 @@ export const WelcomeScreen: FC = function WelcomeScreen() {
       </View>
 
       <View style={themed([$bottomContainer, $bottomContainerInsets])}>
-        <Text tx="welcomeScreen:postscript" size="md" />
+        <Text text="welcomeScreen:postscript" size="md" />
       </View>
     </Screen>
   );
@@ -53,21 +53,6 @@ const $bottomContainer: ThemedStyle<ViewStyle> = ({ colors, spacing }) => ({
   paddingHorizontal: spacing.lg,
   justifyContent: "space-around",
 });
-
-const $welcomeLogo: ThemedStyle<ImageStyle> = ({ spacing }) => ({
-  height: 88,
-  width: "100%",
-  marginBottom: spacing.xxl,
-});
-
-const $welcomeFace: ImageStyle = {
-  height: 169,
-  width: 269,
-  position: "absolute",
-  bottom: -47,
-  right: -80,
-  transform: [{ scaleX: 1 }],
-};
 
 const $welcomeHeading: ThemedStyle<TextStyle> = ({ spacing }) => ({
   marginBottom: spacing.md,

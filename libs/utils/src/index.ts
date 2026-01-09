@@ -4,6 +4,5 @@ export * from "./gestureHandler";
 export * from "./openLinkInBrowser";
 export * from "./storage";
 export * from "./storage.types";
-export * from "./useHeader";
 export * from "./useIsMounted";
 export * from "./useSafeAreaInsetsStyle";

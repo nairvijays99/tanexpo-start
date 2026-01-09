@@ -8,13 +8,13 @@ import {
   type ViewStyle,
 } from "react-native";
 
-import { useAppTheme } from "@/theme/context";
-import type { ThemedStyle } from "@/theme/types";
+import { useAppTheme } from "../theme/context";
+import type { ThemedStyle } from "../theme/types";
 
 import { Button, type ButtonProps } from "./Button";
 import { Text, type TextProps } from "./Text";
 
-const sadFace = require("@assets/images/sad-face.png");
+const sadFace = { uri: "https://placehold.co/100x100" };
 
 interface EmptyStateProps {
   /**

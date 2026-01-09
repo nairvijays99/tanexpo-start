@@ -9,11 +9,14 @@ import {
   type ViewStyle,
 } from "react-native";
 
-import { iconRegistry } from "@/components/Icon";
-import { isRTL } from "@/i18n";
-import { useAppTheme } from "@/theme/context";
-import { $styles } from "@/theme/styles";
-import type { ThemedStyle } from "@/theme/types";
+import { iconRegistry } from "../Icon";
+
+// import { isRTL } from "@/i18n";
+const isRTL = false;
+
+import { useAppTheme } from "../../theme/context";
+import { $styles } from "../../theme/styles";
+import type { ThemedStyle } from "../../theme/types";
 
 import { $inputOuterBase, type BaseToggleInputProps, Toggle, type ToggleProps } from "./Toggle";
 

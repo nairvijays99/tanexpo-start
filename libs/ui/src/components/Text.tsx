@@ -7,9 +7,9 @@ import {
   type TextStyle,
 } from "react-native";
 
-import { useAppTheme } from "@/theme/context";
-import type { ThemedStyle, ThemedStyleArray } from "@/theme/types";
-import { typography } from "@/theme/typography";
+import { useAppTheme } from "../theme/context";
+import type { ThemedStyle } from "../theme/types";
+import { typography } from "../theme/typography";
 
 type Sizes = keyof typeof $sizeStyles;
 type Weights = keyof typeof typography.primary;

@@ -14,8 +14,8 @@ import {
 } from "react-native";
 import { type SystemBarStyle, SystemBars, type SystemBarsProps } from "react-native-edge-to-edge";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
-import { useAppTheme } from "@/theme/context";
-import { $styles } from "@/theme/styles";
+import { useAppTheme } from "../theme/context";
+import { $styles } from "../theme/styles";
 
 export const DEFAULT_BOTTOM_OFFSET = 50;
 
