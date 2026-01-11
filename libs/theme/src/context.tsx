@@ -1,15 +1,14 @@
+import { loadString, remove, saveString } from "@libs/utils";
 import {
   createContext,
-  FC,
-  PropsWithChildren,
+  type FC,
+  type PropsWithChildren,
   useCallback,
   useContext,
   useEffect,
   useMemo,
   useState,
 } from "react";
-
-import { loadString, saveString, remove } from "@libs/utils";
 
 import { darkTheme, lightTheme } from "./theme";
 import type {

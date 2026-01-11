@@ -1,20 +1,19 @@
+import { useAsyncStorageString } from "@libs/utils";
+import {
+  DarkTheme as NavDarkTheme,
+  DefaultTheme as NavDefaultTheme,
+  type Theme as NavTheme,
+} from "@react-navigation/native";
 import {
   createContext,
-  FC,
-  PropsWithChildren,
+  type FC,
+  type PropsWithChildren,
   useCallback,
   useContext,
   useEffect,
   useMemo,
 } from "react";
-import { StyleProp, useColorScheme } from "react-native";
-import {
-  DarkTheme as NavDarkTheme,
-  DefaultTheme as NavDefaultTheme,
-  Theme as NavTheme,
-} from "@react-navigation/native";
-
-import { useAsyncStorageString } from "@libs/utils";
+import { type StyleProp, useColorScheme } from "react-native";
 
 import { setImperativeTheming } from "./context.utils";
 import { darkTheme, lightTheme } from "./theme";
