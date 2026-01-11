@@ -1,12 +1,12 @@
 import { StartClient } from "@tanstack/react-start-client";
 import { hydrateRoot } from "react-dom/client";
-import { AppRegistry } from "react-native-web";
-import { getRouter } from "./router";
+import * as RNWeb from "react-native-web";
 
-const router = getRouter();
+// biome-ignore lint/suspicious/noExplicitAny: AppRegistry is incorrectly typed
+const AppRegistry = (RNWeb as any).AppRegistry;
 
 // Register the app with AppRegistry
-AppRegistry.registerComponent("Main", () => () => <StartClient router={router} />);
+AppRegistry.registerComponent("Main", () => () => <StartClient />);
 
 // Hydrate the app
-hydrateRoot(document, <StartClient router={router} />);
+hydrateRoot(document, <StartClient />);

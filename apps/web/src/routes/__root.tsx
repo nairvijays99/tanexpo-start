@@ -2,7 +2,12 @@ import { TanStackDevtools } from "@tanstack/react-devtools";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
-import { AppRegistry, StyleSheet } from "react-native-web";
+import * as RNWeb from "react-native-web";
+
+// biome-ignore lint/suspicious/noExplicitAny: AppRegistry is incorrectly typed as only a type in @types/react-native-web
+const AppRegistry = (RNWeb as any).AppRegistry;
+// biome-ignore lint/suspicious/noExplicitAny: StyleSheet is incorrectly typed as only a type in @types/react-native-web
+const StyleSheet = (RNWeb as any).StyleSheet;
 
 import appCss from "../styles.css?url";
 
