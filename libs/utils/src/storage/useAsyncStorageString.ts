@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-import { loadString, remove, saveString } from "./asyncStorage";
+import { loadString, saveString, remove } from "./asyncStorage";
 
+/**
+ * AsyncStorage-backed replacement for useMMKVString
+ */
 export function useAsyncStorageString(
   key: string,
 ): [string | null, (value: string | null) => void] {
@@ -24,15 +27,18 @@ export function useAsyncStorageString(
     };
   }, [key]);
 
-  const setStoredValue = (newValue: string | null) => {
-    setValue(newValue);
+  const setStoredValue = useCallback(
+    (newValue: string | null) => {
+      setValue(newValue);
 
-    if (newValue === null) {
-      remove(key);
-    } else {
-      saveString(key, newValue);
-    }
-  };
+      if (newValue === null) {
+        remove(key);
+      } else {
+        saveString(key, newValue);
+      }
+    },
+    [key],
+  );
 
   return [value, setStoredValue];
 }

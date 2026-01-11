@@ -6,11 +6,17 @@ import {
   useContext,
   useEffect,
   useMemo,
-  useState,
 } from "react";
+import { StyleProp, useColorScheme } from "react-native";
+import {
+  DarkTheme as NavDarkTheme,
+  DefaultTheme as NavDefaultTheme,
+  Theme as NavTheme,
+} from "@react-navigation/native";
 
-import { loadString, saveString, remove } from "@libs/utils";
+import { useAsyncStorageString } from "@libs/utils";
 
+import { setImperativeTheming } from "./context.utils";
 import { darkTheme, lightTheme } from "./theme";
 import type {
   AllowedStylesT,
@@ -22,6 +28,7 @@ import type {
 } from "./types";
 
 export type ThemeContextType = {
+  navigationTheme: NavTheme;
   setThemeContextOverride: (newTheme: ThemeContextModeT) => void;
   theme: Theme;
   themeContext: ImmutableThemeContextModeT;
@@ -34,55 +41,43 @@ export interface ThemeProviderProps {
   initialContext?: ThemeContextModeT;
 }
 
-/**
- * Web-only ThemeProvider (TanStack Start)
- */
 export const ThemeProvider: FC<PropsWithChildren<ThemeProviderProps>> = ({
   children,
   initialContext,
 }) => {
-  const [themeScheme, setThemeScheme] = useState<string | null>(null);
+  const systemColorScheme = useColorScheme();
 
-  // Load persisted theme
-  useEffect(() => {
-    loadString("ignite.themeScheme").then(setThemeScheme);
-  }, []);
+  // AsyncStorage-backed theme preference
+  const [themeScheme, setThemeScheme] = useAsyncStorageString("ignite.themeScheme");
 
-  // Browser system theme
-  const systemColorScheme =
-    typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-
-  const setThemeContextOverride = useCallback((newTheme: ThemeContextModeT) => {
-    setThemeScheme(newTheme);
-
-    if (newTheme == null) {
-      remove("ignite.themeScheme");
-    } else {
-      saveString("ignite.themeScheme", newTheme);
-    }
-  }, []);
+  const setThemeContextOverride = useCallback(
+    (newTheme: ThemeContextModeT) => {
+      setThemeScheme(newTheme);
+    },
+    [setThemeScheme],
+  );
 
   const themeContext: ImmutableThemeContextModeT = useMemo(() => {
-    const t = initialContext || themeScheme || systemColorScheme || "light";
+    const t = initialContext || themeScheme || (systemColorScheme ? systemColorScheme : "light");
 
     return t === "dark" ? "dark" : "light";
   }, [initialContext, themeScheme, systemColorScheme]);
+
+  const navigationTheme: NavTheme = useMemo(() => {
+    return themeContext === "dark" ? NavDarkTheme : NavDefaultTheme;
+  }, [themeContext]);
 
   const theme: Theme = useMemo(() => {
     return themeContext === "dark" ? darkTheme : lightTheme;
   }, [themeContext]);
 
-  // Apply HTML theme side-effects
   useEffect(() => {
-    document.documentElement.dataset.theme = themeContext;
-    document.documentElement.style.colorScheme = themeContext;
-  }, [themeContext]);
+    setImperativeTheming(theme);
+  }, [theme]);
 
   const themed = useCallback(
     <T,>(styleOrStyleFn: AllowedStylesT<T>) => {
-      const flatStyles = [styleOrStyleFn].flat(3) as (ThemedStyle<T> | T)[];
+      const flatStyles = [styleOrStyleFn].flat(3) as (ThemedStyle<T> | StyleProp<T>)[];
 
       const stylesArray = flatStyles.map((f) => (typeof f === "function" ? f(theme) : f));
 
@@ -94,6 +89,7 @@ export const ThemeProvider: FC<PropsWithChildren<ThemeProviderProps>> = ({
   return (
     <ThemeContext.Provider
       value={{
+        navigationTheme,
         theme,
         themeContext,
         setThemeContextOverride,
