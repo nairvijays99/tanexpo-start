@@ -32,7 +32,8 @@
       },
       "allowBackup": false,
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.tanexpo.start"
     },
     "plugins": [
       "expo-font",
