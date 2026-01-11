@@ -91,7 +91,6 @@ export default defineConfig(({ command, isSsrBuild }) => {
         "moti",
         "react-native-reanimated",
         "react-native-gesture-handler",
-        "@libs/ui",
         "@libs/app",
         ...(isBuild ? ["styleq"] : []),
       ],
