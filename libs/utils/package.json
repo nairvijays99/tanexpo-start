@@ -1,6 +1,6 @@
 {
-  "name": "@libs/theme",
-  "description": "Shared theme library for Expo and TanStack Start",
+  "name": "@libs/utils",
+  "description": "Shared utils for Expo and TanStack Start",
   "version": "0.0.1",
   "packageManager": "pnpm@10.20.0",
   "main": "src/index.ts",
@@ -8,10 +8,6 @@
   "private": true,
   "exports": {
     ".": "./src/index.ts"
-  },
-  "dependencies": {
-    "@libs/utils": "*",
-    "@react-navigation/native": "^7.0.14"
   },
   "peerDependencies": {
     "react": ">=19.1.0",
@@ -25,5 +21,8 @@
     "react-dom": "19.1.0",
     "react-native": "0.81.5",
     "react-native-web": "~0.21.0"
+  },
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "^2.2.0"
   }
 }
