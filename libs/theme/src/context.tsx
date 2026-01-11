@@ -66,8 +66,9 @@ export const ThemeProvider: FC<PropsWithChildren<ThemeProviderProps>> = ({
    */
   const setThemeContextOverride = useCallback(
     (newTheme: ThemeContextModeT) => {
-      setThemeScheme(newTheme);
+      setThemeScheme(newTheme ?? null);
     },
+
     [setThemeScheme],
   );
 
