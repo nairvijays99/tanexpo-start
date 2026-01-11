@@ -1,3 +1,4 @@
+import { useAsyncStorageString } from "@libs/utils";
 import {
   DarkTheme as NavDarkTheme,
   DefaultTheme as NavDefaultTheme,
@@ -13,9 +14,6 @@ import {
   useMemo,
 } from "react";
 import { type StyleProp, useColorScheme } from "react-native";
-import { useMMKVString } from "react-native-mmkv";
-
-import { storage } from "@/utils/storage";
 
 import { setImperativeTheming } from "./context.utils";
 import { darkTheme, lightTheme } from "./theme";
@@ -58,7 +56,7 @@ export const ThemeProvider: FC<PropsWithChildren<ThemeProviderProps>> = ({
   // The operating system theme:
   const systemColorScheme = useColorScheme();
   // Our saved theme context: can be "light", "dark", or undefined (system theme)
-  const [themeScheme, setThemeScheme] = useMMKVString("ignite.themeScheme", storage);
+  const [themeScheme, setThemeScheme] = useAsyncStorageString("app.themeScheme");
 
   /**
    * This function is used to set the theme context and is exported from the useAppTheme() hook.

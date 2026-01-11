@@ -11,6 +11,8 @@
     "paths": {
       "@libs/app/*": ["libs/app/src/*"],
       "@libs/app": ["libs/app/src/index"],
+      "@libs/utils/*": ["libs/utils/src/*"],
+      "@libs/utils": ["libs/utils/src/index"],
       "@libs/theme/*": ["libs/theme/src/*"],
       "@libs/theme": ["libs/theme/src/index"],
       "@libs/ui/*": ["libs/ui/src/*"],
