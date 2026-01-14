@@ -1,5 +1,5 @@
 import { RootProvider } from "@libs/app";
-import { fontLinks } from "@libs/theme";
+import { customFontsToLoad } from "@libs/theme";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
@@ -88,7 +88,7 @@ export const Route = createRootRoute({
       },
     ],
     links: [
-      ...fontLinks,
+      ...customFontsToLoad,
       // App css
       {
         rel: "stylesheet",

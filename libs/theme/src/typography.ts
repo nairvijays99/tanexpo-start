@@ -18,7 +18,7 @@ export const googleFontHref =
  * <link> metadata required to load fonts on the web.
  * Consumed by createRootRoute({ head }).
  */
-export const fontLinks = [
+export const customFontsToLoad = [
   // Preconnect for faster font fetch
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
