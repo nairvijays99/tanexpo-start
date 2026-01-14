@@ -20,6 +20,12 @@ import type {
   ThemedStyle,
 } from "./types";
 
+declare global {
+  interface Window {
+    __INITIAL_THEME__?: ThemeContextModeT;
+  }
+}
+
 export type ThemeContextType = {
   theme: Theme;
   themeContext: ImmutableThemeContextModeT;
@@ -45,12 +51,28 @@ export const ThemeProvider: FC<PropsWithChildren<ThemeProviderProps>> = ({
   children,
   initialContext,
 }) => {
-  const [themeScheme, setThemeScheme] = useState<ThemeContextModeT>(initialContext);
+  // Initialize theme from window.__INITIAL_THEME__ (set by inline script before React hydrates)
+  // This is safe for SSR because:
+  // - Server: window is undefined → returns initialContext (undefined)
+  // - Client: window.__INITIAL_THEME__ is set by inline script → returns theme value
+  // Both are deterministic at hydration time, preventing mismatches
+  const [themeScheme, setThemeScheme] = useState<ThemeContextModeT>(() => {
+    if (typeof window !== "undefined" && window.__INITIAL_THEME__) {
+      return window.__INITIAL_THEME__;
+    }
+    return initialContext;
+  });
 
-  // Load persisted theme (client-side only)
+  // Only load from storage if we didn't get a theme from the inline script
   useEffect(() => {
     let mounted = true;
 
+    // If we already have a theme from window.__INITIAL_THEME__, skip storage load
+    if (typeof window !== "undefined" && window.__INITIAL_THEME__) {
+      return;
+    }
+
+    // Otherwise, load from storage
     storage.loadString("app.themeScheme").then((value) => {
       if (mounted) {
         setThemeScheme(value as ThemeContextModeT);
