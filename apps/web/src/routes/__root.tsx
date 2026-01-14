@@ -3,6 +3,7 @@ import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
 import { AppRegistry, StyleSheet } from "react-native-web";
+import { RootProvider } from "@libs/app";
 
 import appCss from "../styles.css?url";
 
@@ -33,7 +34,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         {styles}
       </head>
       <body>
-        {children}
+        <RootProvider>{children}</RootProvider>
         <TanStackDevtools
           config={{
             position: "bottom-right",
