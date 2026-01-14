@@ -1,10 +1,28 @@
+import { RootProvider } from "@libs/app";
+import { customFontsToLoad } from "@libs/theme";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-
 import { AppRegistry, StyleSheet } from "react-native-web";
 
 import appCss from "../styles.css?url";
+
+function ThemeScript() {
+  const code = `
+(function () {
+  try {
+    var theme = localStorage.getItem("app.themeScheme");
+    if (!theme) {
+      theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+    window.__INITIAL_THEME__ = theme; 
+  } catch (e) {}
+})();
+`;
+  return <script dangerouslySetInnerHTML={{ __html: code }} />;
+}
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   let styles: React.ReactNode = null;
@@ -26,14 +44,18 @@ function RootDocument({ children }: { children: React.ReactNode }) {
     }
   }
 
+  // ⚠️ DO NOT REMOVE <html suppressHydrationWarning />:
+  // This suppresses an intentional hydration mismatch caused by applying
+  // the theme before first paint to avoid light/dark flash.
   return (
     <html lang="en">
       <head>
+        <ThemeScript />
         <HeadContent />
         {styles}
       </head>
       <body>
-        {children}
+        <RootProvider>{children}</RootProvider>
         <TanStackDevtools
           config={{
             position: "bottom-right",
@@ -66,6 +88,8 @@ export const Route = createRootRoute({
       },
     ],
     links: [
+      ...customFontsToLoad,
+      // App css
       {
         rel: "stylesheet",
         href: appCss,

@@ -1,0 +1,187 @@
+import { storage } from "@libs/utils";
+import {
+  createContext,
+  type FC,
+  type PropsWithChildren,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+
+import { darkTheme, lightTheme } from "./theme";
+import type {
+  AllowedStylesT,
+  ImmutableThemeContextModeT,
+  Theme,
+  ThemeContextModeT,
+  ThemedFnT,
+  ThemedStyle,
+} from "./types";
+
+declare global {
+  interface Window {
+    __INITIAL_THEME__?: ThemeContextModeT;
+  }
+}
+
+export type ThemeContextType = {
+  theme: Theme;
+  themeContext: ImmutableThemeContextModeT;
+  setThemeContextOverride: (newTheme: ThemeContextModeT) => void;
+  themed: ThemedFnT;
+  navigationTheme?: never; // explicitly undefined on web
+};
+
+export const ThemeContext = createContext<ThemeContextType | null>(null);
+
+export interface ThemeProviderProps {
+  initialContext?: ThemeContextModeT;
+}
+
+/**
+ * Web ThemeProvider (TanStack Start)
+ *
+ * - No react-native
+ * - No react-navigation
+ * - SSR safe
+ */
+export const ThemeProvider: FC<PropsWithChildren<ThemeProviderProps>> = ({
+  children,
+  initialContext,
+}) => {
+  // Initialize theme from window.__INITIAL_THEME__ (set by inline script before React hydrates)
+  // This is safe for SSR because:
+  // - Server: window is undefined → returns initialContext (undefined)
+  // - Client: window.__INITIAL_THEME__ is set by inline script → returns theme value
+  // Both are deterministic at hydration time, preventing mismatches
+  const [themeScheme, setThemeScheme] = useState<ThemeContextModeT>(() => {
+    if (typeof window !== "undefined" && window.__INITIAL_THEME__) {
+      return window.__INITIAL_THEME__;
+    }
+    return initialContext;
+  });
+
+  // Only load from storage if we didn't get a theme from the inline script
+  useEffect(() => {
+    let mounted = true;
+
+    // If we already have a theme from window.__INITIAL_THEME__, skip storage load
+    if (typeof window !== "undefined" && window.__INITIAL_THEME__) {
+      return;
+    }
+
+    // Otherwise, load from storage
+    storage.loadString("app.themeScheme").then((value) => {
+      if (mounted) {
+        setThemeScheme(value as ThemeContextModeT);
+      }
+    });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  // System theme (client-only)
+  const [systemColorScheme, setSystemColorScheme] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      setSystemColorScheme(isDark ? "dark" : "light");
+
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      const handler = (e: MediaQueryListEvent) => {
+        setSystemColorScheme(e.matches ? "dark" : "light");
+      };
+      mediaQuery.addEventListener("change", handler);
+      return () => mediaQuery.removeEventListener("change", handler);
+    }
+  }, []);
+
+  /**
+   * Set theme override and persist it
+   */
+  const setThemeContextOverride = useCallback((newTheme: ThemeContextModeT) => {
+    setThemeScheme(newTheme);
+
+    if (newTheme == null) {
+      storage.remove("app.themeScheme");
+    } else {
+      storage.saveString("app.themeScheme", newTheme);
+    }
+
+    if (typeof document !== "undefined") {
+      if (newTheme) {
+        document.documentElement.dataset.theme = newTheme;
+        document.documentElement.style.colorScheme = newTheme;
+      } else {
+        document.documentElement.removeAttribute("data-theme");
+        document.documentElement.style.removeProperty("color-scheme");
+      }
+    }
+  }, []);
+
+  /**
+   * Resolve final theme context
+   */
+  const themeContext: ImmutableThemeContextModeT = useMemo(() => {
+    const t = themeScheme || systemColorScheme || "light";
+    return t === "dark" ? "dark" : "light";
+  }, [themeScheme, systemColorScheme]);
+
+  /**
+   * Resolve theme tokens
+   */
+  const theme = useMemo(() => (themeContext === "dark" ? darkTheme : lightTheme), [themeContext]);
+
+  /**
+   * Apply document-level side effects
+   */
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+
+    document.documentElement.dataset.theme = themeContext;
+    document.documentElement.style.colorScheme = themeContext;
+  }, [themeContext]);
+
+  /**
+   * Themed style helper (same API as native)
+   */
+  const themed = useCallback(
+    <T,>(styleOrStyleFn: AllowedStylesT<T>) => {
+      const flatStyles = [styleOrStyleFn].flat(3) as (ThemedStyle<T> | T)[];
+
+      const stylesArray = flatStyles.map((f) => (typeof f === "function" ? f(theme) : f));
+
+      return Object.assign({}, ...stylesArray) as T;
+    },
+    [theme],
+  );
+
+  return (
+    <ThemeContext.Provider
+      value={{
+        theme,
+        themeContext,
+        setThemeContextOverride,
+        themed,
+      }}
+    >
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+/**
+ * Hook to access theme context
+ */
+export const useAppTheme = () => {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error("useAppTheme must be used within a ThemeProvider");
+  }
+  return context;
+};

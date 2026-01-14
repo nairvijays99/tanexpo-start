@@ -12,6 +12,9 @@ export function Home() {
       <Link href="/about">Go to About</Link>
 
       {/* Static */}
+      <Link href="/theme">Go to App Theme</Link>
+
+      {/* Static */}
       <Link href="/about" prefetch={true}>
         Go to About (prefetch)
       </Link>
