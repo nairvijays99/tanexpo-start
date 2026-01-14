@@ -44,7 +44,7 @@ export const ThemeProvider: FC<PropsWithChildren<ThemeProviderProps>> = ({
   children,
   initialContext,
 }) => {
-  const [themeScheme, setThemeScheme] = useState<ThemeContextModeT>(undefined);
+  const [themeScheme, setThemeScheme] = useState<ThemeContextModeT>(initialContext);
 
   // Load persisted theme (client-side only)
   useEffect(() => {
@@ -78,23 +78,30 @@ export const ThemeProvider: FC<PropsWithChildren<ThemeProviderProps>> = ({
     } else {
       storage.saveString("app.themeScheme", newTheme);
     }
+
+    if (typeof document !== "undefined") {
+      if (newTheme) {
+        document.documentElement.dataset.theme = newTheme;
+        document.documentElement.style.colorScheme = newTheme;
+      } else {
+        document.documentElement.removeAttribute("data-theme");
+        document.documentElement.style.removeProperty("color-scheme");
+      }
+    }
   }, []);
 
   /**
    * Resolve final theme context
    */
   const themeContext: ImmutableThemeContextModeT = useMemo(() => {
-    const t = initialContext || themeScheme || systemColorScheme || "light";
-
+    const t = themeScheme || systemColorScheme || "light";
     return t === "dark" ? "dark" : "light";
-  }, [initialContext, themeScheme, systemColorScheme]);
+  }, [themeScheme, systemColorScheme]);
 
   /**
    * Resolve theme tokens
    */
-  const theme: Theme = useMemo(() => {
-    return themeContext === "dark" ? darkTheme : lightTheme;
-  }, [themeContext]);
+  const theme = useMemo(() => (themeContext === "dark" ? darkTheme : lightTheme), [themeContext]);
 
   /**
    * Apply document-level side effects

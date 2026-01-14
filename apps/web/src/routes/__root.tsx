@@ -6,6 +6,24 @@ import { AppRegistry, StyleSheet } from "react-native-web";
 
 import appCss from "../styles.css?url";
 
+function ThemeScript() {
+  const code = `
+(function () {
+  try {
+    var theme = localStorage.getItem("app.themeScheme");
+    if (!theme) {
+      theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+    }
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+  } catch (e) {}
+})();
+`;
+  return <script dangerouslySetInnerHTML={{ __html: code }} />;
+}
+
 function RootDocument({ children }: { children: React.ReactNode }) {
   let styles: React.ReactNode = null;
 
@@ -29,6 +47,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
+        <ThemeScript />
         <HeadContent />
         {styles}
       </head>
@@ -66,10 +85,28 @@ export const Route = createRootRoute({
       },
     ],
     links: [
+      // Preconnect for faster font fetch
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      {
+        rel: "preconnect",
+        href: "https://fonts.gstatic.com",
+        crossOrigin: "anonymous",
+      },
+
+      // Preload font stylesheet (critical)
+      {
+        rel: "preload",
+        as: "style",
+        href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap",
+      },
+
+      // Load stylesheet normally
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap",
       },
+
+      // App css
       {
         rel: "stylesheet",
         href: appCss,
