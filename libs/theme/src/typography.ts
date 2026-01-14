@@ -43,17 +43,17 @@ export const fontLinks = [
 
 const fonts = {
   spaceGrotesk: {
-    light: fontFamily,
-    normal: fontFamily,
-    medium: fontFamily,
-    semiBold: fontFamily,
-    bold: fontFamily,
+    light: { fontFamily, fontWeight: "300" as const },
+    normal: { fontFamily, fontWeight: "400" as const },
+    medium: { fontFamily, fontWeight: "500" as const },
+    semiBold: { fontFamily, fontWeight: "600" as const },
+    bold: { fontFamily, fontWeight: "700" as const },
   },
   system: {
-    normal: "system-ui",
+    normal: { fontFamily: "system-ui" as const },
   },
   monospace: {
-    normal: "monospace",
+    normal: { fontFamily: "monospace" as const },
   },
 } as const;
 

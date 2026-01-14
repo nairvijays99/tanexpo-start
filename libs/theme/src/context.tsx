@@ -63,10 +63,21 @@ export const ThemeProvider: FC<PropsWithChildren<ThemeProviderProps>> = ({
   }, []);
 
   // System theme (client-only)
-  const systemColorScheme =
-    typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
+  const [systemColorScheme, setSystemColorScheme] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      setSystemColorScheme(isDark ? "dark" : "light");
+
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      const handler = (e: MediaQueryListEvent) => {
+        setSystemColorScheme(e.matches ? "dark" : "light");
+      };
+      mediaQuery.addEventListener("change", handler);
+      return () => mediaQuery.removeEventListener("change", handler);
+    }
+  }, []);
 
   /**
    * Set theme override and persist it
