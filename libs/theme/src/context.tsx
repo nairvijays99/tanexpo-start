@@ -1,15 +1,14 @@
+import { storage } from "@libs/utils";
 import {
   createContext,
-  FC,
-  PropsWithChildren,
+  type FC,
+  type PropsWithChildren,
   useCallback,
   useContext,
   useEffect,
   useMemo,
   useState,
 } from "react";
-
-import { storage } from "@libs/utils";
 
 import { darkTheme, lightTheme } from "./theme";
 import type {
