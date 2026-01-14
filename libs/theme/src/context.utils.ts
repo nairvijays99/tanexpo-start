@@ -1,9 +1,7 @@
-import type { Theme } from "./types";
-
-export const setSystemUIBackgroundColor = (color: string) => {
+export const setSystemUIBackgroundColor = () => {
   // No-op on web
 };
 
-export const setImperativeTheming = (theme: Theme) => {
+export const setImperativeTheming = () => {
   // No-op on web
 };
