@@ -1,5 +1,5 @@
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useAppTheme } from "@libs/theme";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 
 export function AppTheme() {
   const { theme, themeContext, setThemeContextOverride } = useAppTheme();
