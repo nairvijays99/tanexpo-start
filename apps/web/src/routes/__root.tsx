@@ -3,6 +3,7 @@ import { TanStackDevtools } from "@tanstack/react-devtools";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { AppRegistry, StyleSheet } from "react-native-web";
+import { fontLinks } from "@libs/theme";
 
 import appCss from "../styles.css?url";
 
@@ -88,27 +89,7 @@ export const Route = createRootRoute({
       },
     ],
     links: [
-      // Preconnect for faster font fetch
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      {
-        rel: "preconnect",
-        href: "https://fonts.gstatic.com",
-        crossOrigin: "anonymous",
-      },
-
-      // Preload font stylesheet (critical)
-      {
-        rel: "preload",
-        as: "style",
-        href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap",
-      },
-
-      // Load stylesheet normally
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap",
-      },
-
+      ...fontLinks,
       // App css
       {
         rel: "stylesheet",
