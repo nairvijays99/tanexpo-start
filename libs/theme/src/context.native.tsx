@@ -64,7 +64,7 @@ export const ThemeProvider: FC<PropsWithChildren<ThemeProviderProps>> = ({
   useEffect(() => {
     let mounted = true;
 
-    storage.loadString("ignite.themeScheme").then((value) => {
+    storage.loadString("app.themeScheme").then((value) => {
       if (mounted) {
         setThemeScheme(value as ThemeContextModeT);
       }
