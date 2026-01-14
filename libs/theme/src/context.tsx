@@ -25,6 +25,7 @@ export type ThemeContextType = {
   themeContext: ImmutableThemeContextModeT;
   setThemeContextOverride: (newTheme: ThemeContextModeT) => void;
   themed: ThemedFnT;
+  navigationTheme?: never; // explicitly undefined on web
 };
 
 export const ThemeContext = createContext<ThemeContextType | null>(null);
