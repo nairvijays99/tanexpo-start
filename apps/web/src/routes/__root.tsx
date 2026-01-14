@@ -13,12 +13,11 @@ function ThemeScript() {
   try {
     var theme = localStorage.getItem("app.themeScheme");
     if (!theme) {
-      theme = window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
+      theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
     }
     document.documentElement.dataset.theme = theme;
     document.documentElement.style.colorScheme = theme;
+    window.__INITIAL_THEME__ = theme; 
   } catch (e) {}
 })();
 `;
@@ -49,7 +48,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   // This suppresses an intentional hydration mismatch caused by applying
   // the theme before first paint to avoid light/dark flash.
   return (
-    <html lang="en" suppressHydrationWarning={true}>
+    <html lang="en">
       <head>
         <ThemeScript />
         <HeadContent />
