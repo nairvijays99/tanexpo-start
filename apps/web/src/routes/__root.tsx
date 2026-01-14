@@ -1,9 +1,8 @@
+import { RootProvider } from "@libs/app";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-
 import { AppRegistry, StyleSheet } from "react-native-web";
-import { RootProvider } from "@libs/app";
 
 import appCss from "../styles.css?url";
 
