@@ -1,7 +1,6 @@
-import { FC } from "react";
-import { Pressable, Text, View } from "react-native";
-
 import { useAppTheme } from "@libs/theme";
+import type { FC } from "react";
+import { Pressable, Text, View } from "react-native";
 
 export const ThemeToggle: FC = () => {
   const { themeContext, setThemeContextOverride, themed } = useAppTheme();
