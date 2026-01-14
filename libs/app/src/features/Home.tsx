@@ -1,6 +1,5 @@
 import { Pressable, Text, View } from "react-native";
 import { Link, useRouter } from "tanexpo";
-import { ThemeToggle } from "../components/ThemeToggle";
 
 export function Home() {
   const router = useRouter();
@@ -11,6 +10,9 @@ export function Home() {
 
       {/* Static */}
       <Link href="/about">Go to About</Link>
+
+      {/* Static */}
+      <Link href="/theme">Go to App Theme</Link>
 
       {/* Static */}
       <Link href="/about" prefetch={true}>
@@ -96,8 +98,6 @@ export function Home() {
       {/* Static */}
       <Link href="/redirectToUser">Redirect to user</Link>
       <Link href="/redirectToUserPost">Redirect to user post</Link>
-
-      <ThemeToggle />
     </View>
   );
 }

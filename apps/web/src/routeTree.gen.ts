@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ThemeRouteImport } from './routes/theme'
 import { Route as RedirectToUserPostRouteImport } from './routes/redirectToUserPost'
 import { Route as RedirectToUserRouteImport } from './routes/redirectToUser'
 import { Route as AboutRouteImport } from './routes/about'
@@ -16,6 +17,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as UserIdIndexRouteImport } from './routes/user/$id/index'
 import { Route as UserIdPostPostIdRouteImport } from './routes/user/$id/post/$postId'
 
+const ThemeRoute = ThemeRouteImport.update({
+  id: '/theme',
+  path: '/theme',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RedirectToUserPostRoute = RedirectToUserPostRouteImport.update({
   id: '/redirectToUserPost',
   path: '/redirectToUserPost',
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/redirectToUser': typeof RedirectToUserRoute
   '/redirectToUserPost': typeof RedirectToUserPostRoute
+  '/theme': typeof ThemeRoute
   '/user/$id': typeof UserIdIndexRoute
   '/user/$id/post/$postId': typeof UserIdPostPostIdRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/redirectToUser': typeof RedirectToUserRoute
   '/redirectToUserPost': typeof RedirectToUserPostRoute
+  '/theme': typeof ThemeRoute
   '/user/$id': typeof UserIdIndexRoute
   '/user/$id/post/$postId': typeof UserIdPostPostIdRoute
 }
@@ -69,6 +77,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/redirectToUser': typeof RedirectToUserRoute
   '/redirectToUserPost': typeof RedirectToUserPostRoute
+  '/theme': typeof ThemeRoute
   '/user/$id/': typeof UserIdIndexRoute
   '/user/$id/post/$postId': typeof UserIdPostPostIdRoute
 }
@@ -79,6 +88,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/redirectToUser'
     | '/redirectToUserPost'
+    | '/theme'
     | '/user/$id'
     | '/user/$id/post/$postId'
   fileRoutesByTo: FileRoutesByTo
@@ -87,6 +97,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/redirectToUser'
     | '/redirectToUserPost'
+    | '/theme'
     | '/user/$id'
     | '/user/$id/post/$postId'
   id:
@@ -95,6 +106,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/redirectToUser'
     | '/redirectToUserPost'
+    | '/theme'
     | '/user/$id/'
     | '/user/$id/post/$postId'
   fileRoutesById: FileRoutesById
@@ -104,12 +116,20 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   RedirectToUserRoute: typeof RedirectToUserRoute
   RedirectToUserPostRoute: typeof RedirectToUserPostRoute
+  ThemeRoute: typeof ThemeRoute
   UserIdIndexRoute: typeof UserIdIndexRoute
   UserIdPostPostIdRoute: typeof UserIdPostPostIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/theme': {
+      id: '/theme'
+      path: '/theme'
+      fullPath: '/theme'
+      preLoaderRoute: typeof ThemeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/redirectToUserPost': {
       id: '/redirectToUserPost'
       path: '/redirectToUserPost'
@@ -160,6 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   RedirectToUserRoute: RedirectToUserRoute,
   RedirectToUserPostRoute: RedirectToUserPostRoute,
+  ThemeRoute: ThemeRoute,
   UserIdIndexRoute: UserIdIndexRoute,
   UserIdPostPostIdRoute: UserIdPostPostIdRoute,
 }
