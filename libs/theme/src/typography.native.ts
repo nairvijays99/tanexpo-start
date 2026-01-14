@@ -49,14 +49,14 @@ const fonts = {
 };
 
 // Platform-specific secondary font
-// @ts-ignore - Platform.select types are overly strict, runtime behavior is correct
+// @ts-expect-error - Platform.select types are overly strict, runtime behavior is correct
 const secondaryFont = Platform.select({
   ios: fonts.helveticaNeue,
   android: fonts.sansSerif,
 }) as typeof fonts.helveticaNeue | typeof fonts.sansSerif;
 
 // Platform-specific code font
-// @ts-ignore - Platform.select types are overly strict, runtime behavior is correct
+// @ts-expect-error - Platform.select types are overly strict, runtime behavior is correct
 const codeFont = Platform.select({
   ios: fonts.courier,
   android: fonts.monospace,
