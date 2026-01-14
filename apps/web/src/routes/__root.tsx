@@ -44,8 +44,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
     }
   }
 
+  // ⚠️ DO NOT REMOVE <html suppressHydrationWarning />:
+  // This suppresses an intentional hydration mismatch caused by applying
+  // the theme before first paint to avoid light/dark flash.
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <head>
         <ThemeScript />
         <HeadContent />
