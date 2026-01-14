@@ -1,14 +1,13 @@
-import { ThemeProvider, useAppTheme } from "@libs/theme";
+import { customFontsToLoad, ThemeProvider, useAppTheme } from "@libs/theme";
 import { ThemeProvider as NavigationThemeProvider } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import type { FC, PropsWithChildren } from "react";
+import { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 import { initialWindowMetrics, SafeAreaProvider } from "react-native-safe-area-context";
-import { customFontsToLoad } from "@libs/theme";
-import { useEffect } from "react";
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
