@@ -1,5 +1,14 @@
-import { RootProvider } from "@libs/app";
+import { RootProvider, ErrorBoundary as SharedErrorBoundary } from "@libs/app";
 import { Stack } from "expo-router";
+
+interface ErrorBoundaryProps {
+  error: Error;
+  retry: () => void;
+}
+
+export function ErrorBoundary(props: ErrorBoundaryProps) {
+  return <SharedErrorBoundary {...props} />;
+}
 
 export default function RootLayout() {
   return (

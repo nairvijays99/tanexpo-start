@@ -1,4 +1,4 @@
-import { RootProvider } from "@libs/app";
+import { ErrorBoundary, NotFound, RootProvider } from "@libs/app";
 import { customFontsToLoad } from "@libs/theme";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
@@ -96,6 +96,15 @@ export const Route = createRootRoute({
       },
     ],
   }),
+
+  errorComponent: (props) => {
+    console.log("Root Route ErrorComponent: Rendered", {
+      error: props.error?.message,
+    });
+    return <ErrorBoundary error={props.error} retry={props.reset} />;
+  },
+
+  notFoundComponent: () => <NotFound onGoBack={() => window.history.back()} />,
 
   shellComponent: RootDocument,
 });
