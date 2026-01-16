@@ -14,7 +14,7 @@ import {
 import { Button, type ButtonProps } from "./Button";
 import { Text, type TextProps } from "./Text";
 
-const sadFace = require("@assets/images/sad-face.png");
+const sadFace = require("../images/sad-face.png");
 
 interface EmptyStateProps {
   /**

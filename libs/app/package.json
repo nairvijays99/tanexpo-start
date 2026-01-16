@@ -12,6 +12,7 @@
   "dependencies": {
     "tanexpo": "^0.2.0",
     "@libs/theme": "workspace:*",
+    "@libs/ui": "workspace:*",
     "@libs/utils": "workspace:*"
   },
   "peerDependencies": {
