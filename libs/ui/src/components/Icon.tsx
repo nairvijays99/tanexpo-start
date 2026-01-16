@@ -10,6 +10,29 @@ import {
   type ViewStyle,
 } from "react-native";
 
+import back from "../icons/back.png";
+import bell from "../icons/bell.png";
+import caretLeft from "../icons/caretLeft.png";
+import caretRight from "../icons/caretRight.png";
+import check from "../icons/check.png";
+import clap from "../icons/demo/clap.png";
+import community from "../icons/demo/community.png";
+import components from "../icons/demo/components.png";
+import debug from "../icons/demo/debug.png";
+import github from "../icons/demo/github.png";
+import heart from "../icons/demo/heart.png";
+import hidden from "../icons/hidden.png";
+import ladybug from "../icons/ladybug.png";
+import lock from "../icons/lock.png";
+import menu from "../icons/menu.png";
+import more from "../icons/more.png";
+import pin from "../icons/demo/pin.png";
+import podcast from "../icons/demo/podcast.png";
+import settings from "../icons/settings.png";
+import slack from "../icons/demo/slack.png";
+import view from "../icons/view.png";
+import x from "../icons/x.png";
+
 export type IconTypes = keyof typeof iconRegistry;
 
 type BaseIconProps = {
@@ -109,28 +132,28 @@ export function Icon(props: IconProps) {
 }
 
 export const iconRegistry = {
-  back: require("../icons/back.png"),
-  bell: require("../icons/bell.png"),
-  caretLeft: require("../icons/caretLeft.png"),
-  caretRight: require("../icons/caretRight.png"),
-  check: require("../icons/check.png"),
-  clap: require("../icons/demo/clap.png"),
-  community: require("../icons/demo/community.png"),
-  components: require("../icons/demo/components.png"),
-  debug: require("../icons/demo/debug.png"),
-  github: require("../icons/demo/github.png"),
-  heart: require("../icons/demo/heart.png"),
-  hidden: require("../icons/hidden.png"),
-  ladybug: require("../icons/ladybug.png"),
-  lock: require("../icons/lock.png"),
-  menu: require("../icons/menu.png"),
-  more: require("../icons/more.png"),
-  pin: require("../icons/demo/pin.png"),
-  podcast: require("../icons/demo/podcast.png"),
-  settings: require("../icons/settings.png"),
-  slack: require("../icons/demo/slack.png"),
-  view: require("../icons/view.png"),
-  x: require("../icons/x.png"),
+  back,
+  bell,
+  caretLeft,
+  caretRight,
+  check,
+  clap,
+  community,
+  components,
+  debug,
+  github,
+  heart,
+  hidden,
+  ladybug,
+  lock,
+  menu,
+  more,
+  pin,
+  podcast,
+  settings,
+  slack,
+  view,
+  x,
 };
 
 const $imageStyleBase: ImageStyle = {
