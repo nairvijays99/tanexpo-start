@@ -14,7 +14,9 @@
       "@libs/theme/*": ["libs/theme/src/*"],
       "@libs/theme": ["libs/theme/src/index"],
       "@libs/utils/*": ["libs/utils/src/*"],
-      "@libs/utils": ["libs/utils/src/index"]
+      "@libs/utils": ["libs/utils/src/index"],
+      "@libs/i18n/*": ["libs/i18n/src/*"],
+      "@libs/i18n": ["libs/i18n/src/index"]
     },
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
