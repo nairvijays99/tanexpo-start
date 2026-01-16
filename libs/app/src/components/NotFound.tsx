@@ -13,7 +13,7 @@ export const NotFound: React.FC<NotFoundProps> = ({
   message = "The page you are looking for doesn't exist or has been moved.",
 }) => {
   const { theme } = useAppTheme();
-  const { colors, spacing } = theme;
+  const { colors } = theme;
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>

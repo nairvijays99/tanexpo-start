@@ -1,4 +1,4 @@
-import { useAppTheme } from "@libs/theme";
+import { type Theme, useAppTheme } from "@libs/theme";
 import { Component, type ErrorInfo, type ReactNode } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
@@ -56,7 +56,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
 export const ErrorView = ({ error, onReset }: { error: Error | null; onReset: () => void }) => {
   console.log("ErrorView: Rendering", { errorMessage: error?.message });
-  let theme: any;
+  let theme: Theme | undefined;
   try {
     // biome-ignore lint/correctness/useHookAtTopLevel: intentional safeguard in error view
     theme = useAppTheme().theme;
