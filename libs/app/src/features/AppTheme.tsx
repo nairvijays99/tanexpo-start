@@ -9,8 +9,27 @@ import {
   Switch,
   TextField,
   Text as UIText,
+  CheckboxToggleProps,
+  RadioToggleProps,
+  SwitchToggleProps,
 } from "@libs/ui";
+import { useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+
+function ControlledCheckbox(props: CheckboxToggleProps) {
+  const [value, setValue] = useState(props.value || false);
+  return <Checkbox {...props} value={value} onPress={() => setValue(!value)} />;
+}
+
+function ControlledRadio(props: RadioToggleProps) {
+  const [value, setValue] = useState(props.value || false);
+  return <Radio {...props} value={value} onPress={() => setValue(!value)} />;
+}
+
+function ControlledSwitch(props: SwitchToggleProps) {
+  const [value, setValue] = useState(props.value || false);
+  return <Switch {...props} value={value} onPress={() => setValue(!value)} />;
+}
 
 export function AppTheme() {
   const { theme, themeContext, setThemeContextOverride } = useAppTheme();
@@ -145,15 +164,15 @@ export function AppTheme() {
           />
           <View style={styles.row}>
             <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
-              <Switch value />
+              <ControlledSwitch value={false} />
               <UIText text="Switch" style={{ marginLeft: 8 }} />
             </View>
             <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
-              <Checkbox value />
+              <ControlledCheckbox value={false} />
               <UIText text="Checkbox" style={{ marginLeft: 8 }} />
             </View>
             <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
-              <Radio value />
+              <ControlledRadio value={false} />
               <UIText text="Radio" style={{ marginLeft: 8 }} />
             </View>
           </View>
