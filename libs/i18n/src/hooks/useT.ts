@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { normalizeLanguage } from "../detection";
 import type { TKey } from "../types";
 
 export function useT<Namespace extends string>(ns: Namespace) {
@@ -11,7 +12,7 @@ export function useT<Namespace extends string>(ns: Namespace) {
   return {
     t: typedT,
     i18n,
-    currentLanguage: i18n.language,
+    currentLanguage: normalizeLanguage(i18n.resolvedLanguage || i18n.language),
     changeLanguage: (lang: string) => i18n.changeLanguage(lang),
   };
 }
