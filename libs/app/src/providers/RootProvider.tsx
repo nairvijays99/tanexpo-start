@@ -1,4 +1,5 @@
 import { ThemeProvider } from "@libs/theme";
+import "@libs/i18n";
 import type { FC, PropsWithChildren } from "react";
 
 /**

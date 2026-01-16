@@ -1,4 +1,5 @@
 import { customFontsToLoad, ThemeProvider, useAppTheme } from "@libs/theme";
+import "@libs/i18n";
 import { ThemeProvider as NavigationThemeProvider } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";

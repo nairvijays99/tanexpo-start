@@ -1,0 +1,7 @@
+{
+  "genericError": "Algo salió mal",
+  "retry": "Intentar de nuevo",
+  "goBackHome": "Volver al inicio",
+  "notFoundTitle": "404 - Página no encontrada",
+  "notFoundMessage": "La página que buscas no existe o ha sido movida."
+}

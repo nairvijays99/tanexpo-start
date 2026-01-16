@@ -1,6 +1,7 @@
+import { CommonKeys, useT } from "@libs/i18n";
 import { type Theme, useAppTheme } from "@libs/theme";
-import { Component, type ErrorInfo, type ReactNode } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Component, type ErrorInfo, type ReactNode, Suspense } from "react";
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 interface Props {
   children?: ReactNode;
@@ -47,7 +48,11 @@ export class ErrorBoundary extends Component<Props, State> {
         return this.props.fallback;
       }
 
-      return <ErrorView error={error} onReset={this.handleReset} />;
+      return (
+        <Suspense fallback={<ActivityIndicator style={{ flex: 1 }} />}>
+          <ErrorView error={error} onReset={this.handleReset} />
+        </Suspense>
+      );
     }
 
     return this.props.children;
@@ -70,18 +75,22 @@ export const ErrorView = ({ error, onReset }: { error: Error | null; onReset: ()
     tint: "#C76542",
   };
 
+  const { t } = useT("common");
+
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.content}>
-        <Text style={[styles.title, { color: colors.text }]}>Oops! Something went wrong.</Text>
+        <Text style={[styles.title, { color: colors.text }]}>{t(CommonKeys.genericError)}</Text>
         <Text style={[styles.message, { color: colors.text }]}>
-          {error?.message || "An unexpected error occurred."}
+          {error?.message || t(CommonKeys.genericError)}
         </Text>
         <TouchableOpacity
           style={[styles.button, { backgroundColor: colors.tint }]}
           onPress={onReset}
         >
-          <Text style={[styles.buttonText, { color: colors.background }]}>Try Again</Text>
+          <Text style={[styles.buttonText, { color: colors.background }]}>
+            {t(CommonKeys.retry)}
+          </Text>
         </TouchableOpacity>
       </View>
     </View>

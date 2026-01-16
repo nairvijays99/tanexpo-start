@@ -1,5 +1,7 @@
+import { CommonKeys, useT } from "@libs/i18n";
 import { useAppTheme } from "@libs/theme";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Suspense } from "react";
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 interface NotFoundProps {
   onGoBack?: () => void;
@@ -7,32 +9,40 @@ interface NotFoundProps {
   message?: string;
 }
 
-export const NotFound: React.FC<NotFoundProps> = ({
-  onGoBack,
-  title = "404 - Page Not Found",
-  message = "The page you are looking for doesn't exist or has been moved.",
-}) => {
+const NotFoundContent: React.FC<NotFoundProps> = ({ onGoBack, title, message }) => {
   const { theme } = useAppTheme();
   const { colors } = theme;
+  const { t } = useT("common");
+
+  const displayTitle = title || t(CommonKeys.notFoundTitle);
+  const displayMessage = message || t(CommonKeys.notFoundMessage);
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.content}>
         <Text style={[styles.code, { color: colors.tint }]}>404</Text>
-        <Text style={[styles.title, { color: colors.text }]}>{title}</Text>
-        <Text style={[styles.message, { color: colors.textDim }]}>{message}</Text>
+        <Text style={[styles.title, { color: colors.text }]}>{displayTitle}</Text>
+        <Text style={[styles.message, { color: colors.textDim }]}>{displayMessage}</Text>
         {onGoBack && (
           <TouchableOpacity
             style={[styles.button, { backgroundColor: colors.tint }]}
             onPress={onGoBack}
           >
-            <Text style={[styles.buttonText, { color: colors.background }]}>Go Back Home</Text>
+            <Text style={[styles.buttonText, { color: colors.background }]}>
+              {t(CommonKeys.goBackHome)}
+            </Text>
           </TouchableOpacity>
         )}
       </View>
     </View>
   );
 };
+
+export const NotFound: React.FC<NotFoundProps> = (props) => (
+  <Suspense fallback={<ActivityIndicator style={{ flex: 1 }} />}>
+    <NotFoundContent {...props} />
+  </Suspense>
+);
 
 const styles = StyleSheet.create({
   container: {

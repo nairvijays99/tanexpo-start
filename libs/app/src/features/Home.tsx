@@ -1,18 +1,50 @@
-import { useState } from "react";
-import { Pressable, Text, View } from "react-native";
+import { HomeKeys, useT } from "@libs/i18n";
+import { Suspense, useState } from "react";
+import { ActivityIndicator, Pressable, Text, View } from "react-native";
 import { Link, useRouter } from "tanexpo";
 
-export function Home() {
+function HomeContent() {
   const router = useRouter();
   const [shouldCrash, setShouldCrash] = useState(false);
+  const { t, currentLanguage, changeLanguage } = useT("home");
 
   if (shouldCrash) {
     throw new Error("This is a test rendering error triggered from the Home screen!");
   }
 
+  const toggleLanguage = () => {
+    changeLanguage(currentLanguage === "en" ? "es" : "en");
+  };
+
   return (
     <View style={{ padding: 16, gap: 12 }}>
-      <Text style={{ fontSize: 36, color: "black" }}>Home</Text>
+      <Text style={{ fontSize: 36, color: "black" }}>{t(HomeKeys.welcome)}</Text>
+      <Text style={{ fontSize: 16, color: "#666" }}>{t(HomeKeys.description)}</Text>
+
+      <View
+        style={{
+          padding: 12,
+          backgroundColor: "#f3f4f6",
+          borderRadius: 8,
+          marginVertical: 8,
+          gap: 8,
+        }}
+      >
+        <Text style={{ fontWeight: "600" }}>
+          {t(HomeKeys.detectedLanguage)}: {currentLanguage}
+        </Text>
+        <Pressable
+          onPress={toggleLanguage}
+          style={({ pressed }) => ({
+            backgroundColor: "#3b82f6",
+            padding: 8,
+            borderRadius: 4,
+            opacity: pressed ? 0.7 : 1,
+          })}
+        >
+          <Text style={{ color: "white", textAlign: "center" }}>{t(HomeKeys.toggleLanguage)}</Text>
+        </Pressable>
+      </View>
 
       {/* Static */}
       <Link href="/about">Go to About</Link>
@@ -136,5 +168,13 @@ export function Home() {
         </Pressable>
       </View>
     </View>
+  );
+}
+
+export function Home() {
+  return (
+    <Suspense fallback={<ActivityIndicator style={{ flex: 1 }} />}>
+      <HomeContent />
+    </Suspense>
   );
 }
