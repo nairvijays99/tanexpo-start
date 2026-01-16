@@ -1,5 +1,35 @@
 import { useAppTheme } from "@libs/theme";
+import {
+  Button,
+  Card,
+  Checkbox,
+  type CheckboxToggleProps,
+  Icon,
+  ListItem,
+  Radio,
+  type RadioToggleProps,
+  Switch,
+  type SwitchToggleProps,
+  TextField,
+  Text as UIText,
+} from "@libs/ui";
+import { useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+
+function ControlledCheckbox(props: CheckboxToggleProps) {
+  const [value, setValue] = useState(props.value || false);
+  return <Checkbox {...props} value={value} onPress={() => setValue(!value)} />;
+}
+
+function ControlledRadio(props: RadioToggleProps) {
+  const [value, setValue] = useState(props.value || false);
+  return <Radio {...props} value={value} onPress={() => setValue(!value)} />;
+}
+
+function ControlledSwitch(props: SwitchToggleProps) {
+  const [value, setValue] = useState(props.value || false);
+  return <Switch {...props} value={value} onPress={() => setValue(!value)} />;
+}
 
 export function AppTheme() {
   const { theme, themeContext, setThemeContextOverride } = useAppTheme();
@@ -102,6 +132,86 @@ export function AppTheme() {
           ))}
         </View>
       </View>
+
+      {/* Components Section */}
+      <View style={styles.section}>
+        <Text style={[styles.sectionTitle, { color: colors.text }]}>Components</Text>
+
+        <View style={styles.componentItem}>
+          <Text style={[styles.componentLabel, { color: colors.text }]}>UI Text Presets</Text>
+          <UIText preset="heading" text="Heading Preset" />
+          <UIText preset="subheading" text="Subheading Preset" />
+          <UIText preset="bold" text="Bold Preset" />
+          <UIText preset="default" text="Default Preset" />
+        </View>
+
+        <View style={styles.componentItem}>
+          <Text style={[styles.componentLabel, { color: colors.text }]}>Buttons</Text>
+          <View style={styles.row}>
+            <Button text="Default" style={{ flex: 1, marginRight: 8 }} />
+            <Button preset="filled" text="Filled" style={{ flex: 1, marginRight: 8 }} />
+            <Button preset="reversed" text="Reversed" style={{ flex: 1 }} />
+          </View>
+        </View>
+
+        <View style={styles.componentItem}>
+          <Text style={[styles.componentLabel, { color: colors.text }]}>Inputs & Toggles</Text>
+          <TextField
+            label="Label"
+            placeholder="Placeholder"
+            helper="Helper text"
+            containerStyle={{ marginBottom: 16 }}
+          />
+          <View style={styles.row}>
+            <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
+              <ControlledSwitch value={false} />
+              <UIText text="Switch" style={{ marginLeft: 8 }} />
+            </View>
+            <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
+              <ControlledCheckbox value={false} />
+              <UIText text="Checkbox" style={{ marginLeft: 8 }} />
+            </View>
+            <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
+              <ControlledRadio value={false} />
+              <UIText text="Radio" style={{ marginLeft: 8 }} />
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.componentItem}>
+          <Text style={[styles.componentLabel, { color: colors.text }]}>Icons</Text>
+          <View style={styles.row}>
+            <Icon icon="ladybug" size={32} />
+            <View style={{ width: 16 }} />
+            <Icon icon="settings" size={32} />
+            <View style={{ width: 16 }} />
+            <Icon icon="bell" size={32} />
+            <View style={{ width: 16 }} />
+            <Icon icon="check" size={32} />
+            <View style={{ width: 16 }} />
+            <Icon icon="lock" size={32} />
+          </View>
+        </View>
+
+        <View style={styles.componentItem}>
+          <Text style={[styles.componentLabel, { color: colors.text }]}>Card & ListItem</Text>
+          <Card
+            heading="Card Heading"
+            content="This is the card content. It can be quite long and should wrap inside the card container."
+            footer="Card Footer"
+            style={{ marginBottom: 16 }}
+          />
+          <ListItem
+            topSeparator
+            bottomSeparator
+            text="List Item Title"
+            LeftComponent={<Icon icon="bell" style={{ marginRight: 12 }} />}
+            RightComponent={<Icon icon="caretRight" />}
+          >
+            <UIText preset="bold" size="xxs" text="Secondary description text" />
+          </ListItem>
+        </View>
+      </View>
     </ScrollView>
   );
 }
@@ -190,5 +300,19 @@ const styles = StyleSheet.create({
   spacingBar: {
     height: 24,
     borderRadius: 4,
+  },
+  componentItem: {
+    marginBottom: 32,
+  },
+  componentLabel: {
+    fontSize: 14,
+    fontWeight: "700",
+    marginBottom: 12,
+    textTransform: "uppercase",
+    opacity: 0.6,
+  },
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
   },
 });

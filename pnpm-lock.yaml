@@ -198,6 +198,9 @@ importers:
       '@libs/theme':
         specifier: workspace:*
         version: link:../theme
+      '@libs/ui':
+        specifier: workspace:*
+        version: link:../ui
       '@libs/utils':
         specifier: workspace:*
         version: link:../utils
@@ -250,6 +253,10 @@ importers:
         version: 0.21.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
 
   libs/ui:
+    dependencies:
+      '@libs/theme':
+        specifier: workspace:*
+        version: link:../theme
     devDependencies:
       '@types/react':
         specifier: 19.1.0
