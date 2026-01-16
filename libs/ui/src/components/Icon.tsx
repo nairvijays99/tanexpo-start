@@ -1,0 +1,138 @@
+import { useAppTheme } from "@libs/theme";
+import {
+  Image,
+  type ImageStyle,
+  type StyleProp,
+  TouchableOpacity,
+  type TouchableOpacityProps,
+  View,
+  type ViewProps,
+  type ViewStyle,
+} from "react-native";
+
+export type IconTypes = keyof typeof iconRegistry;
+
+type BaseIconProps = {
+  /**
+   * The name of the icon
+   */
+  icon: IconTypes;
+
+  /**
+   * An optional tint color for the icon
+   */
+  color?: string;
+
+  /**
+   * An optional size for the icon. If not provided, the icon will be sized to the icon's resolution.
+   */
+  size?: number;
+
+  /**
+   * Style overrides for the icon image
+   */
+  style?: StyleProp<ImageStyle>;
+
+  /**
+   * Style overrides for the icon container
+   */
+  containerStyle?: StyleProp<ViewStyle>;
+};
+
+type PressableIconProps = Omit<TouchableOpacityProps, "style"> & BaseIconProps;
+type IconProps = Omit<ViewProps, "style"> & BaseIconProps;
+
+/**
+ * A component to render a registered icon.
+ * It is wrapped in a <TouchableOpacity />
+ * @see [Documentation and Examples]{@link https://docs.infinite.red/ignite-cli/boilerplate/app/components/Icon/}
+ * @param {PressableIconProps} props - The props for the `PressableIcon` component.
+ * @returns {JSX.Element} The rendered `PressableIcon` component.
+ */
+export function PressableIcon(props: PressableIconProps) {
+  const {
+    icon,
+    color,
+    size,
+    style: $imageStyleOverride,
+    containerStyle: $containerStyleOverride,
+    ...pressableProps
+  } = props;
+
+  const { theme } = useAppTheme();
+
+  const $imageStyle: StyleProp<ImageStyle> = [
+    $imageStyleBase,
+    { tintColor: color ?? theme.colors.text },
+    size !== undefined && { width: size, height: size },
+    $imageStyleOverride,
+  ];
+
+  return (
+    <TouchableOpacity {...pressableProps} style={$containerStyleOverride}>
+      <Image style={$imageStyle} source={iconRegistry[icon]} />
+    </TouchableOpacity>
+  );
+}
+
+/**
+ * A component to render a registered icon.
+ * It is wrapped in a <View />, use `PressableIcon` if you want to react to input
+ * @see [Documentation and Examples]{@link https://docs.infinite.red/ignite-cli/boilerplate/app/components/Icon/}
+ * @param {IconProps} props - The props for the `Icon` component.
+ * @returns {JSX.Element} The rendered `Icon` component.
+ */
+export function Icon(props: IconProps) {
+  const {
+    icon,
+    color,
+    size,
+    style: $imageStyleOverride,
+    containerStyle: $containerStyleOverride,
+    ...viewProps
+  } = props;
+
+  const { theme } = useAppTheme();
+
+  const $imageStyle: StyleProp<ImageStyle> = [
+    $imageStyleBase,
+    { tintColor: color ?? theme.colors.text },
+    size !== undefined && { width: size, height: size },
+    $imageStyleOverride,
+  ];
+
+  return (
+    <View {...viewProps} style={$containerStyleOverride}>
+      <Image style={$imageStyle} source={iconRegistry[icon]} />
+    </View>
+  );
+}
+
+export const iconRegistry = {
+  back: require("../icons/back.png"),
+  bell: require("../icons/bell.png"),
+  caretLeft: require("../icons/caretLeft.png"),
+  caretRight: require("../icons/caretRight.png"),
+  check: require("../icons/check.png"),
+  clap: require("../icons/demo/clap.png"),
+  community: require("../icons/demo/community.png"),
+  components: require("../icons/demo/components.png"),
+  debug: require("../icons/demo/debug.png"),
+  github: require("../icons/demo/github.png"),
+  heart: require("../icons/demo/heart.png"),
+  hidden: require("../icons/hidden.png"),
+  ladybug: require("../icons/ladybug.png"),
+  lock: require("../icons/lock.png"),
+  menu: require("../icons/menu.png"),
+  more: require("../icons/more.png"),
+  pin: require("../icons/demo/pin.png"),
+  podcast: require("../icons/demo/podcast.png"),
+  settings: require("../icons/settings.png"),
+  slack: require("../icons/demo/slack.png"),
+  view: require("../icons/view.png"),
+  x: require("../icons/x.png"),
+};
+
+const $imageStyleBase: ImageStyle = {
+  resizeMode: "contain",
+};
