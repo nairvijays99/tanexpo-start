@@ -21,15 +21,15 @@ import components from "../icons/demo/components.png";
 import debug from "../icons/demo/debug.png";
 import github from "../icons/demo/github.png";
 import heart from "../icons/demo/heart.png";
+import pin from "../icons/demo/pin.png";
+import podcast from "../icons/demo/podcast.png";
+import slack from "../icons/demo/slack.png";
 import hidden from "../icons/hidden.png";
 import ladybug from "../icons/ladybug.png";
 import lock from "../icons/lock.png";
 import menu from "../icons/menu.png";
 import more from "../icons/more.png";
-import pin from "../icons/demo/pin.png";
-import podcast from "../icons/demo/podcast.png";
 import settings from "../icons/settings.png";
-import slack from "../icons/demo/slack.png";
 import view from "../icons/view.png";
 import x from "../icons/x.png";
 

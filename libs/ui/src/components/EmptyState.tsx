@@ -10,11 +10,9 @@ import {
   View,
   type ViewStyle,
 } from "react-native";
-
+import sadFace from "../images/sad-face.png";
 import { Button, type ButtonProps } from "./Button";
 import { Text, type TextProps } from "./Text";
-
-import sadFace from "../images/sad-face.png";
 
 interface EmptyStateProps {
   /**
