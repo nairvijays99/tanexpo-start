@@ -13,6 +13,8 @@
       "@libs/app": ["libs/app/src/index"],
       "@libs/theme/*": ["libs/theme/src/*"],
       "@libs/theme": ["libs/theme/src/index"],
+      "@libs/ui/*": ["libs/ui/src/*"],
+      "@libs/ui": ["libs/ui/src/index"],
       "@libs/utils/*": ["libs/utils/src/*"],
       "@libs/utils": ["libs/utils/src/index"],
       "@libs/i18n/*": ["libs/i18n/src/*"],

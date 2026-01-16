@@ -12,6 +12,7 @@
   "dependencies": {
     "@libs/i18n": "workspace:*",
     "@libs/theme": "workspace:*",
+    "@libs/ui": "workspace:*",
     "@libs/utils": "workspace:*",
     "tanexpo": "^0.2.0"
   },
