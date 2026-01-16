@@ -1,11 +1,11 @@
-import { customFontsToLoad, ThemeProvider, useAppTheme } from "@libs/theme";
 import { i18n } from "@libs/i18n";
-import { I18nextProvider } from "react-i18next";
+import { customFontsToLoad, ThemeProvider, useAppTheme } from "@libs/theme";
 import { ThemeProvider as NavigationThemeProvider } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import type { FC, PropsWithChildren } from "react";
 import { useEffect } from "react";
+import { I18nextProvider } from "react-i18next";
 import { StyleSheet } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { KeyboardProvider } from "react-native-keyboard-controller";

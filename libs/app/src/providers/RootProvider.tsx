@@ -1,7 +1,7 @@
-import { ThemeProvider } from "@libs/theme";
 import { i18n } from "@libs/i18n";
-import { I18nextProvider } from "react-i18next";
+import { ThemeProvider } from "@libs/theme";
 import type { FC, PropsWithChildren } from "react";
+import { I18nextProvider } from "react-i18next";
 
 /**
  * Root provider for the application.
