@@ -1,8 +1,14 @@
+import { useState } from "react";
 import { Pressable, Text, View } from "react-native";
 import { Link, useRouter } from "tanexpo";
 
 export function Home() {
   const router = useRouter();
+  const [shouldCrash, setShouldCrash] = useState(false);
+
+  if (shouldCrash) {
+    throw new Error("This is a test rendering error triggered from the Home screen!");
+  }
 
   return (
     <View style={{ padding: 16, gap: 12 }}>
@@ -98,6 +104,37 @@ export function Home() {
       {/* Static */}
       <Link href="/redirectToUser">Redirect to user</Link>
       <Link href="/redirectToUserPost">Redirect to user post</Link>
+
+      <View
+        style={{
+          marginTop: 20,
+          paddingTop: 20,
+          borderTopWidth: 1,
+          borderTopColor: "#eee",
+          gap: 12,
+        }}
+      >
+        <Text style={{ fontWeight: "bold" }}>Test Shared Components:</Text>
+
+        {/* Test Not Found */}
+        <Link href="/this-route-does-not-exist">Test 404 (Not Found)</Link>
+
+        {/* Test Error Boundary */}
+        <Pressable
+          onPress={() => {
+            console.log("Home: Triggering error state");
+            setShouldCrash(true);
+          }}
+          style={({ pressed }) => ({
+            opacity: pressed ? 0.5 : 1,
+            padding: 8,
+            backgroundColor: "#fee2e2",
+            borderRadius: 4,
+          })}
+        >
+          <Text style={{ color: "#991b1b" }}>Trigger Runtime Error (ErrorBoundary)</Text>
+        </Pressable>
+      </View>
     </View>
   );
 }

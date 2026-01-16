@@ -1,3 +1,4 @@
+export * from "./components";
 export * from "./features/About";
 export * from "./features/AppTheme";
 export * from "./features/Home";
