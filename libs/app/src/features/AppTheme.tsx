@@ -3,15 +3,15 @@ import {
   Button,
   Card,
   Checkbox,
+  type CheckboxToggleProps,
   Icon,
   ListItem,
   Radio,
+  type RadioToggleProps,
   Switch,
+  type SwitchToggleProps,
   TextField,
   Text as UIText,
-  CheckboxToggleProps,
-  RadioToggleProps,
-  SwitchToggleProps,
 } from "@libs/ui";
 import { useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
