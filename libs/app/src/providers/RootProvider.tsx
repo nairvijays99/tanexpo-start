@@ -1,5 +1,6 @@
 import { ThemeProvider } from "@libs/theme";
-import "@libs/i18n";
+import { i18n } from "@libs/i18n";
+import { I18nextProvider } from "react-i18next";
 import type { FC, PropsWithChildren } from "react";
 
 /**
@@ -10,5 +11,9 @@ import type { FC, PropsWithChildren } from "react";
  * This prevents hydration mismatches while still avoiding FOUC (the theme script runs before React).
  */
 export const RootProvider: FC<PropsWithChildren> = ({ children }) => {
-  return <ThemeProvider initialContext={undefined}>{children}</ThemeProvider>;
+  return (
+    <I18nextProvider i18n={i18n}>
+      <ThemeProvider initialContext={undefined}>{children}</ThemeProvider>
+    </I18nextProvider>
+  );
 };

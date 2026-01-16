@@ -1,5 +1,6 @@
 import { customFontsToLoad, ThemeProvider, useAppTheme } from "@libs/theme";
-import "@libs/i18n";
+import { i18n } from "@libs/i18n";
+import { I18nextProvider } from "react-i18next";
 import { ThemeProvider as NavigationThemeProvider } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
@@ -46,15 +47,17 @@ export const RootProvider: FC<PropsWithChildren> = ({ children }) => {
   }
 
   return (
-    <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-      <GestureHandlerRootView style={styles.container}>
-        <KeyboardProvider>
-          <ThemeProvider>
-            <NavigationThemeBridge>{children}</NavigationThemeBridge>
-          </ThemeProvider>
-        </KeyboardProvider>
-      </GestureHandlerRootView>
-    </SafeAreaProvider>
+    <I18nextProvider i18n={i18n}>
+      <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+        <GestureHandlerRootView style={styles.container}>
+          <KeyboardProvider>
+            <ThemeProvider>
+              <NavigationThemeBridge>{children}</NavigationThemeBridge>
+            </ThemeProvider>
+          </KeyboardProvider>
+        </GestureHandlerRootView>
+      </SafeAreaProvider>
+    </I18nextProvider>
   );
 };
 
